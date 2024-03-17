@@ -1,0 +1,1972 @@
+2024-03-17 17:32:40.373705: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.386386: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.373697: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.388071: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.423479: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.423571: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.685889: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:40.686690: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -3.78TiB (-4153862257057 bytes) by rematerialization; only reduced to 29.00TiB (31885837206456 bytes), down from 29.00TiB (31885837206584 bytes) originally
+2024-03-17 17:32:50.623600: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.623810: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.624074 3218653 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.624232: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.624459: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.624742 3218656 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.637919: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.638130: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.638388 3896614 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.638458: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.638621: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.638764 3896615 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.671888: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.672057: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.672212 3896613 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.672743: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.672837: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.672984 3896612 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.934341: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.934542: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.934794 3218654 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+2024-03-17 17:32:50.935946: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 4.00TiB (rounded to 4398046511104)requested by op 
+2024-03-17 17:32:50.936148: W external/tsl/tsl/framework/bfc_allocator.cc:494] *___________________________________________________________________________________________________
+E0317 17:32:50.936399 3218655 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 170, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 34, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 4398046511104 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:         8B
+              constant allocation:         0B
+        maybe_live_out allocation:    4.00TiB
+     preallocated temp allocation:   21.00TiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   25.00TiB
+              total fragmentation:     1.2KiB (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[549755813888]
+		==========================
+
+	Buffer 2:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 3:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 4:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 5:
+		Size: 4.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/mul" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: f64[4096,8192,16384]
+		==========================
+
+	Buffer 6:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 7:
+		Size: 2.00TiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[256,2147483648]
+		==========================
+
+	Buffer 8:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 9:
+		Size: 512.00GiB
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: pred[4096,8192,16384]
+		==========================
+
+	Buffer 10:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 11:
+		Size: 512B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: u32[128]
+		==========================
+
+	Buffer 12:
+		Size: 56B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/erf_inv" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (f64[4096,8192,16384], f64[4096,8192,16384], f64[4096,8192,16384], pred[4096,8192,16384], pred[4096,8192,16384], /*index=5*/f64[4096,8192,16384], f64[549755813888])
+		==========================
+
+	Buffer 13:
+		Size: 32B
+		XLA Label: tuple
+		Shape: (u32[256,2147483648], u32[256,2147483648], u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+	Buffer 14:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/slice[start_indices=(0, 1) limit_indices=(256, 2) strides=(1, 1)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: fusion
+		Shape: (u32[256,1], u32[256,1])
+		==========================
+
+	Buffer 15:
+		Size: 16B
+		Operator: op_name="jit(_normal)/jit(main)/jit(_normal_real)/jit(_uniform)/threefry2x32" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py" source_line=34
+		XLA Label: custom-call
+		Shape: (u32[256,2147483648], u32[256,2147483648])
+		==========================
+
+
+srun: error: r6i7n1: tasks 5-7: Exited with exit code 1
+srun: Terminating StepId=1125460.29
+srun: error: r6i6n8: tasks 0-3: Exited with exit code 1
+srun: error: r6i7n1: task 4: Exited with exit code 1

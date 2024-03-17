@@ -1,0 +1,18 @@
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Local array shape: (16, 128, 128)
+Global array shape: (128, 128, 128)
+1 took 0.0019104810198768973 s
+2 took 0.002131683984771371 s
+0 took 0.002288342919200659 s
+3 took 0.0024019430857151747 s
+6 took 0.009544146014377475 s
+7 took 0.009855098091065884 s
+5 took 0.010132001945748925 s
+4 took 0.010143982013687491 s
+Maximum reconstruction diff 5.261357728159055e-06

@@ -1,0 +1,34 @@
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Global array shape: (512, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+Local array shape: (32, 512, 512)
+5 took 0.2326011200202629 s
+6 took 0.23306854895781726 s
+3 took 0.23311362508684397 s
+4 took 0.23324798594694585 s
+7 took 0.23320841800887138 s
+15 took 0.23290405108127743 s
+14 took 0.23237394005991518 s
+9 took 0.2333786719245836 s
+0 took 0.23364646697882563 s
+11 took 0.2333119650138542 s
+10 took 0.23370732204057276 s
+2 took 0.23397081601433456 s
+8 took 0.23386875505093485 s
+12 took 0.23381913197226822 s
+1 took 0.23448435694444925 s
+13 took 0.23417652398347855 s
+Maximum reconstruction diff 1.7882730378863358e-14

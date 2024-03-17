@@ -1,0 +1,18 @@
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+Global array shape: (256, 256, 256)
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+Local array shape: (32, 256, 256)
+2 took 0.03731865796726197 s
+3 took 0.03767012502066791 s
+6 took 0.024859298020601273 s
+1 took 0.037690786994062364 s
+7 took 0.024811940966174006 s
+0 took 0.037331214058212936 s
+5 took 0.025229807011783123 s
+4 took 0.02535715000703931 s
+Maximum reconstruction diff 8.914663568031323e-15

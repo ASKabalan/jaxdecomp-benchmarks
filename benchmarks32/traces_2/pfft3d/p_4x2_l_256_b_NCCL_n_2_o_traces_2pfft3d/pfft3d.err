@@ -1,0 +1,616 @@
+2024-03-17 15:22:20.353981: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.356420: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.356420: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.356742: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.357627: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.354005: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.354051: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:20.354019: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 11.21GiB (12041271705 bytes) by rematerialization; only reduced to 32.00GiB (34359738368 bytes), down from 32.00GiB (34359738368 bytes) originally
+2024-03-17 15:22:30.439565: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+2024-03-17 15:22:30.439589: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+2024-03-17 15:22:30.439788: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+2024-03-17 15:22:30.439795: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+E0317 15:22:30.439858  883500 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1525c1923b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1525c1923be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1525c1923b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1525c1923be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+2024-03-17 15:22:30.442763: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+E0317 15:22:30.439866  883501 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+2024-03-17 15:22:30.442704: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1493a4fdbb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1493a4fdbbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+2024-03-17 15:22:30.442897: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1493a4fdbb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1493a4fdbbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+2024-03-17 15:22:30.442878: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+2024-03-17 15:22:30.440745: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+E0317 15:22:30.442948 3105459 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+2024-03-17 15:22:30.440988: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x15398ecebb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x15398ecebbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+2024-03-17 15:22:30.441026: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x15398ecebb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x15398ecebbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+E0317 15:22:30.441050  883502 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+E0317 15:22:30.442976 3105458 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14a4211bfb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14a4211bfbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14cb3769bb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14cb3769bbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14a4211bfb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14a4211bfbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14cb3769bb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14cb3769bbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+2024-03-17 15:22:30.441122: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+2024-03-17 15:22:30.443734: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+E0317 15:22:30.441172  883503 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+2024-03-17 15:22:30.443693: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869184)requested by op 
+2024-03-17 15:22:30.443810: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14f75e6b3b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14f75e6b3be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+2024-03-17 15:22:30.443835: W external/tsl/tsl/framework/bfc_allocator.cc:494] ***************************************************_________________________________________________
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14f75e6b3b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14f75e6b3be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+E0317 15:22:30.443878 3105461 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1469c55b7b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1469c55b7be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1469c55b7b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1469c55b7be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+E0317 15:22:30.443898 3105460 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1499fff2fb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1499fff2fbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1499fff2fb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1499fff2fbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1525c1923b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1525c1923be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1525c1923b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1525c1923be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1493a4fdbb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1493a4fdbbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1493a4fdbb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1493a4fdbbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14a4211bfb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14a4211bfbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14a4211bfb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14a4211bfbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14f75e6b3b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14f75e6b3be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14f75e6b3b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14f75e6b3be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14cb3769bb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14cb3769bbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x14cb3769bb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x14cb3769bbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x15398ecebb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x15398ecebbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x15398ecebb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x15398ecebbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1499fff2fb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1499fff2fbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1499fff2fb50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1499fff2fbe0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 168, in <module>
+    run_benchmark(pdims, global_shape, backend, nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/pfft3d.py", line 93, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869184 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    4.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:    8.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   28.00GiB
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1469c55b7b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1469c55b7be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: s8[17179869184]
+		==========================
+
+	Buffer 2:
+		Size: 8.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(_do_pfft)/custom_partitioning[partition=<function partition at 0x1469c55b7b50> propagate_user_sharding=None infer_sharding_from_operands=<function infer_sharding_from_operands at 0x1469c55b7be0> decode_shardings=True in_tree=PyTreeDef((*,)) out_tree=PyTreeDef(*) static_args=[<FftType.FFT: 0>, False]]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jaxdecomp/_src/fft.py" source_line=307
+		XLA Label: fusion
+		Shape: c64[512,1024,2048]
+		==========================
+
+	Buffer 3:
+		Size: 4.00GiB
+		Entry Parameter Subshape: f32[512,1024,2048]
+		==========================
+
+
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i6n7:883500] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i6n7:883503] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i1n0:3105458] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i1n0:3105460] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i1n0:3105461] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i1n0:3105459] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i6n7:883501] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+*** The MPI_Comm_free() function was called after MPI_FINALIZE was invoked.
+*** This is disallowed by the MPI standard.
+*** Your MPI job will now abort.
+[r7i6n7:883502] Local abort after MPI_FINALIZE started completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!
+srun: error: r7i6n7: tasks 5,7: Exited with exit code 1
+srun: Terminating StepId=1124578.17
+srun: error: r7i1n0: tasks 1,3: Exited with exit code 1
+slurmstepd: error: *** STEP 1124578.17 ON r7i1n0 CANCELLED AT 2024-03-17T15:22:31 ***
+srun: error: r7i1n0: task 2: Exited with exit code 1
+srun: error: r7i6n7: task 6: Exited with exit code 1
+srun: error: r7i1n0: task 0: Exited with exit code 1
+srun: error: r7i6n7: task 4: Exited with exit code 1

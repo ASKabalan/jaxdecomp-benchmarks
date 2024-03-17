@@ -1,0 +1,10 @@
+Local array shape: (128, 512, 512)
+Local array shape: (128, 512, 512)
+Global array shape: (512, 512, 512)
+Local array shape: (128, 512, 512)
+Local array shape: (128, 512, 512)
+2 took 0.03655139799229801 s
+1 took 0.0363354500150308 s
+3 took 0.0370567130157724 s
+0 took 0.03667623898945749 s
+Maximum reconstruction diff 6.2476687144632396e-15

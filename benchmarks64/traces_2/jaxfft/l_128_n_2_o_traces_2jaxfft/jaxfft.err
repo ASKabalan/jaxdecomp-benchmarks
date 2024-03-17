@@ -1,0 +1,710 @@
+2024-03-17 17:41:33.882059: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.882053: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.882670: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.882879: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.895460: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.895466: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.896840: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:33.896850: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below 6.46GiB (6940998041 bytes) by rematerialization; only reduced to 50.00GiB (53687091216 bytes), down from 50.00GiB (53687091216 bytes) originally
+2024-03-17 17:41:43.958573: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.958690: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+E0317 17:41:43.958761 3238238 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+2024-03-17 17:41:43.959268: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.959381: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+E0317 17:41:43.959441 3238239 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+2024-03-17 17:41:43.960475: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.960456: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.960698: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+2024-03-17 17:41:43.960694: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+E0317 17:41:43.960812 3238240 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+E0317 17:41:43.960809 3238241 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+2024-03-17 17:41:43.969167: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_2_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.969148: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_3_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.969379: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+2024-03-17 17:41:43.969370: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+E0317 17:41:43.969448 3914471 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+E0317 17:41:43.969441 3914472 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+2024-03-17 17:41:43.969939: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.969960: W external/tsl/tsl/framework/bfc_allocator.cc:482] Allocator (GPU_1_bfc) ran out of memory trying to allocate 16.00GiB (rounded to 17179869440)requested by op 
+2024-03-17 17:41:43.970051: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+2024-03-17 17:41:43.970058: W external/tsl/tsl/framework/bfc_allocator.cc:494] ____************************************************************************________________________
+E0317 17:41:43.970120 3914469 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+E0317 17:41:43.970122 3914470 pjrt_stream_executor_client.cc:2804] Execution of replica 0 failed: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 57, in run_benchmark
+    do_fft(global_array).block_until_ready()
+jaxlib.xla_extension.XlaRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 17179869312 bytes.
+BufferAssignment OOM Debugging.
+BufferAssignment stats:
+             parameter allocation:    1.00GiB
+              constant allocation:         0B
+        maybe_live_out allocation:   16.00GiB
+     preallocated temp allocation:   16.00GiB
+  preallocated temp fragmentation:         0B (0.00%)
+                 total allocation:   33.00GiB
+              total fragmentation:       128B (0.00%)
+Peak buffers:
+	Buffer 1:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 2:
+		Size: 16.00GiB
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: fft
+		Shape: c128[1024,1024,1024]
+		==========================
+
+	Buffer 3:
+		Size: 1.00GiB
+		Entry Parameter Subshape: f64[128,1024,1024]
+		==========================
+
+	Buffer 4:
+		Size: 16B
+		Operator: op_name="jit(do_fft)/jit(main)/jit(fft)/fft[fft_type=FftType.FFT fft_lengths=(1024, 1024, 1024)]" source_file="/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py" source_line=44
+		XLA Label: all-gather-start
+		Shape: (c128[128,1024,1024], c128[1024,1024,1024])
+		==========================
+
+
+srun: error: r6i6n8: tasks 0-1,3: Exited with exit code 1
+srun: Terminating StepId=1125460.67
+srun: error: r6i7n1: tasks 4-5,7: Exited with exit code 1
+slurmstepd: error: *** STEP 1125460.67 ON r6i6n8 CANCELLED AT 2024-03-17T17:41:45 ***
+srun: error: r6i6n8: task 2: Exited with exit code 1
+srun: error: r6i7n1: task 6: Exited with exit code 1

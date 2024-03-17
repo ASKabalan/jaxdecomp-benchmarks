@@ -1,0 +1,21 @@
+Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3), cuda(id=4), cuda(id=5), cuda(id=6), cuda(id=7), cuda(id=8), cuda(id=9), cuda(id=10), cuda(id=11), cuda(id=12), cuda(id=13), cuda(id=14), cuda(id=15)]
+Global dims (1024, 1024, 1024), pdims (8, 2) , Backend NCCL local array shape (128, 512, 1024) global array shape (1024, 1024, 1024)
+Sharding :
+NamedSharding(mesh=Mesh('z': 8, 'y': 2), spec=PartitionSpec('z', 'y'))
+1 took 0.13676594092976302 s
+2 took 0.13652623898815364 s
+3 took 0.1364289530320093 s
+0 took 0.13680809503421187 s
+4 took 0.13723628607112914 s
+10 took 0.1362595499958843 s
+12 took 0.139555458095856 s
+5 took 0.1371848719427362 s
+7 took 0.13798180094454437 s
+11 took 0.13612555898725986 s
+6 took 0.1380180580308661 s
+8 took 0.13632881303783506 s
+9 took 0.13644316501449794 s
+13 took 0.13965441402979195 s
+14 took 0.1384052410721779 s
+15 took 0.13840755191631615 s
+Maximum reconstruction diff 9.638088158681057e-06
