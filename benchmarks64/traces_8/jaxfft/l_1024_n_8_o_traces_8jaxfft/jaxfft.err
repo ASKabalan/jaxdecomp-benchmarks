@@ -1,0 +1,3850 @@
+2024-03-19 02:51:36.746266: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.753718: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.756125: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.756246: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.776173: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.751328: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.757914: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.762841: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.789713: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.757505: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.759156: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.760637: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.761077: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.780704: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.785626: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.762320: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.788625: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.764167: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.793526: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.765445: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.756201: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.758844: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.761283: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.759434: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.774727: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.761219: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.779552: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.764464: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.798636: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.775320: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.780160: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.784842: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.780251: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.789849: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.785355: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.804906: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.777512: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.779325: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.781236: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.782445: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.784217: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.789305: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.794162: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.799172: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.799264: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.800461: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.794798: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.803743: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.801701: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.804146: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.805561: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.805914: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.804242: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.806606: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.805402: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+2024-03-19 02:51:36.810539: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+2024-03-19 02:51:36.810834: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+2024-03-19 02:51:36.806790: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.807003: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.809034: W external/xla/xla/service/hlo_rematerialization.cc:2941] Can't reduce memory use below -7.58TiB (-8332006442606 bytes) by rematerialization; only reduced to 58.00TiB (63771674412984 bytes), down from 58.00TiB (63771674413112 bytes) originally
+2024-03-19 02:51:36.809968: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.811755: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.811913: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+2024-03-19 02:51:36.814047: E external/xla/xla/status_macros.cc:54] INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+*** Begin stack trace ***
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	
+	
+	
+	
+	
+	
+	_PyObject_MakeTpCall
+	
+	
+	_PyObject_MakeTpCall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyObject_Call
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	
+	
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	_PyFunction_Vectorcall
+	_PyEval_EvalFrameDefault
+	
+	PyEval_EvalCode
+	
+	
+	
+	_PyRun_SimpleFileObject
+	_PyRun_AnyFileObject
+	Py_RunMain
+	Py_BytesMain
+	__libc_start_main
+	
+*** End stack trace ***
+
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+jax.errors.SimplifiedTraceback: For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 110, in <module>
+    run_benchmark(global_shape,nb_nodes, output_path)
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/benchmarks/jaxfft.py", line 25, in run_benchmark
+    array = jax.random.normal(
+  File "/gpfsdswork/projects/rech/tkc/commun/jaxDecomp/venv/v100/lib/python3.10/site-packages/jax/_src/random.py", line 720, in normal
+    return _normal(key, shape, dtype)  # type: ignore
+jaxlib.xla_extension.XlaRuntimeError: INTERNAL: RET_CHECK failure (external/xla/xla/service/gpu/fusions/fusion_emitter.cc:96) device_info.block_dim_limit().x == 0 || launch_dims.block_counts().x < device_info.block_dim_limit().x Kernel 'loop_broadcast_fusion_2_remat2_1' launch needs more blocks (2147483648) than allowed by hardware (2147483647).
+srun: error: r8i7n0: tasks 25-27: Exited with exit code 1
+srun: Terminating StepId=1139838.42
+srun: error: r6i6n5: tasks 8-11: Exited with exit code 1
+srun: error: r6i6n4: tasks 4-7: Exited with exit code 1
+srun: error: r8i7n1: tasks 28-31: Exited with exit code 1
+srun: error: r8i6n6: tasks 12-15: Exited with exit code 1
+srun: error: r6i6n3: tasks 0-3: Exited with exit code 1
+srun: error: r8i6n7: tasks 16-19: Exited with exit code 1
+srun: error: r8i6n8: tasks 20-23: Exited with exit code 1
+srun: error: r8i7n0: task 24: Exited with exit code 1

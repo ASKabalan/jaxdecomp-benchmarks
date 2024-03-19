@@ -1,0 +1,66 @@
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Global array shape: (512, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+Local array shape: (16, 512, 512)
+23 took 0.11541836685501039 s
+22 took 0.11550865811295807 s
+20 took 0.1156050618737936 s
+21 took 0.11546113295480609 s
+19 took 0.1163754160515964 s
+18 took 0.11620177002623677 s
+17 took 0.11701233312487602 s
+16 took 0.11747294780798256 s
+15 took 0.10939913801848888 s
+14 took 0.10916117997840047 s
+25 took 0.11499560181982815 s
+24 took 0.11475338693708181 s
+11 took 0.1095947700086981 s
+13 took 0.11020772880874574 s
+10 took 0.11021100915968418 s
+12 took 0.11040578410029411 s
+9 took 0.11027158494107425 s
+26 took 0.11609143204987049 s
+27 took 0.1155515389982611 s
+28 took 0.119247643975541 s
+29 took 0.11844624299556017 s
+3 took 0.10902083897963166 s
+8 took 0.1112510550301522 s
+6 took 0.10930849285796285 s
+5 took 0.10934839001856744 s
+7 took 0.10956971487030387 s
+31 took 0.1189779550768435 s
+30 took 0.11922629806213081 s
+2 took 0.10923341009765863 s
+0 took 0.1094549058470875 s
+4 took 0.10975855682045221 s
+1 took 0.10944821196608245 s
+Maximum reconstruction diff 2.3168659026850946e-05

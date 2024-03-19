@@ -1,0 +1,37 @@
+Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3), cuda(id=4), cuda(id=5), cuda(id=6), cuda(id=7), cuda(id=8), cuda(id=9), cuda(id=10), cuda(id=11), cuda(id=12), cuda(id=13), cuda(id=14), cuda(id=15), cuda(id=16), cuda(id=17), cuda(id=18), cuda(id=19), cuda(id=20), cuda(id=21), cuda(id=22), cuda(id=23), cuda(id=24), cuda(id=25), cuda(id=26), cuda(id=27), cuda(id=28), cuda(id=29), cuda(id=30), cuda(id=31)]
+Global dims (512, 512, 512), pdims (16, 2) , Backend MPI local array shape (32, 256, 512) global array shape (512, 512, 512)
+Sharding :
+NamedSharding(mesh=Mesh('z': 16, 'y': 2), spec=PartitionSpec('z', 'y'))
+8 took 0.7967794688884169 s
+5 took 0.4719816001597792 s
+12 took 0.48376563214696944 s
+2 took 0.7417711899615824 s
+3 took 0.7417629859410226 s
+1 took 1.1249850299209356 s
+0 took 1.125168169848621 s
+18 took 0.46749897208064795 s
+24 took 0.3530201488174498 s
+21 took 0.4707347019575536 s
+30 took 0.06103081000037491 s
+9 took 0.7967191659845412 s
+10 took 0.6484758020378649 s
+11 took 0.6484490248840302 s
+4 took 0.4719864290673286 s
+6 took 0.4735898410435766 s
+7 took 0.47348750312812626 s
+19 took 0.4675512968096882 s
+13 took 0.48371774586848915 s
+17 took 0.468328061979264 s
+14 took 0.48032140801660717 s
+16 took 0.46836780686862767 s
+15 took 0.48034228291362524 s
+20 took 0.47081049904227257 s
+23 took 0.4694715749938041 s
+25 took 0.35307909501716495 s
+22 took 0.469489251030609 s
+27 took 0.3532686932012439 s
+26 took 0.3533161780796945 s
+31 took 0.061150283087044954 s
+28 took 0.06268274178728461 s
+29 took 0.06267671100795269 s
+Maximum reconstruction diff 7.123243166158079e-15
