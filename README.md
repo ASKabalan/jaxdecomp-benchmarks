@@ -35,13 +35,15 @@ Then use `python plotter.py -h` for more info
 Example to plot data as X axis with fixed GPUs
 
 ```bash
-python plotter.py -f benchmarks32/JAX.csv benchmarks32/JAXDECOMP.csv -g 4 8 16 -s JAX -fs 12 8 -nl
+python plotter.py -f benchmarks32/JAX.csv benchmarks32/JAXDECOMP.csv -g 4 8 16 32 -s JAX -fs 12 8 -nl -o plots/single_precision_gpus.png
+python plotter.py -f benchmarks64/JAX.csv benchmarks64/JAXDECOMP.csv -g 4 8 16 32 -s JAX -fs 12 8 -nl -o plots/double_precision_gpus.png
 ```
 
 To plot GPUs as X axis with fixed data
 
 ```bash
-python plotter.py -f benchmarks32/JAX.csv benchmarks32/JAXDECOMP.csv -d 32 64 128 256 512 1024 2048 -s JAX -fs 12 8 -nl
+python plotter.py -f benchmarks32/JAX.csv benchmarks32/JAXDECOMP.csv -d 128 256 512 1024 2048 -s JAX -fs 14 12 -nl -o plots/single_precision_data.png
+python plotter.py -f benchmarks64/JAX.csv benchmarks64/JAXDECOMP.csv -d 128 256 512 1024 2048 -s JAX -fs 14 12 -nl -o plots/double_precision_data.png
 ```
 
 My plots are in `plots` folder

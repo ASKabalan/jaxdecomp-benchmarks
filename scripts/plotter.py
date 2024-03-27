@@ -5,24 +5,23 @@ from matplotlib.ticker import ScalarFormatter
 import sys
 import pandas as pd
 import os
-import seaborn as sns
-sns.plotting_context("poster")
-sns.set(font_scale=1.4)
+
 # To be used to plot the CSV comming from the benchmarks
 # Usage example
-# python plotter.py --csv_files JAX.csv JAXDECOMP.csv --gpus 4 8 16 --simple_plot JAX --figure_size 6 4 --nodes_in_label -o output.{png/pdf}
-# python plotter.py --csv_files JAX.csv JAXDECOMP.csv --data_size 128 256 512 1024 2048 --simple_plot JAX --figure_size 6 4 --nodes_in_label -o output.{png/pdf}
+# python plotter.py --csv_files JAX.csv JAXDECOMP.csv --gpus 4 8 16 --simple_plot JAX --figure_size 6 4 --nodes_in_label
+# python plotter.py --csv_files JAX.csv JAXDECOMP.csv --data_size 128 256 512 1024 2048 --simple_plot JAX --figure_size 6 4 --nodes_in_label
 
 # You should have one CSV per framework, each csv can contain results from different number of nodes
 # for more info use python plotter.py -h
 
-def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,figure_size=(6, 4),output=None):
+def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,figure_size=(6, 4)):
    
     # filter methods that do not have the data size
     for method, df in dataframes.items():
       if df[df['x'] == int(fixed_data_size[0])].empty:
         continue
     # filter data size not contained in the data
+    fixed_data_size = [data_size for data_size in fixed_data_size if not dataframes[list(dataframes.keys())[0]][dataframes[list(dataframes.keys())[0]]['x'] == int(data_size)].empty]
 
     # Calculate the number of subplots based on the number of data sizes
     num_subplots = len(fixed_data_size)
@@ -41,7 +40,6 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
       # Select the current subplot
       ax = axs[i]
       number_of_gpus = []
-      times = []
 
       for method, df in dataframes.items():
         # filter for chosen data size
@@ -62,9 +60,9 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
 
           if df_backend.empty:
             continue
-          
+
           # get the fastest decomposition (number of gpus and nodes must be fixed here)
-          df_decomp = df_backend.groupby(['gpus', 'backend','nodes'])
+          df_decomp = df_backend.groupby(['x', 'y', 'z', 'backend','nodes'])
           all_decomp = []
           sorted_dfs = []
 
@@ -75,7 +73,6 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
             sorted_dfs.append(group.iloc[0])
         
           sorted_df = pd.DataFrame(sorted_dfs)
-          times.extend(sorted_df["time"].values)
 
           label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
 
@@ -87,23 +84,15 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
         #  ax.annotate(txt, (df['gpus'].values[i], df['time'].values[i]), textcoords="offset points", xytext=(0,10), ha='center')
 
       # add title data size
-      f2 = lambda a: np.log2(a)
-      g2= lambda b: b**2
-
       ax.set_title(f"Data Size: {data_size}")
       # Set x-axis ticks exactly at the provided data_size values
+      ax.set_yscale('log')
+      
       unique_gpus = list(dict.fromkeys(number_of_gpus))
       unique_gpus.sort()
-      # Set limits
-      print(19*min(unique_gpus)/20)
-      ax.set_xlim([19*min(unique_gpus)/20, 21*max(unique_gpus) / 20])
-      ax.set_ylim([5e-4, 1e1])
-      # Set ticks
-      ax.set_xscale('function', functions=(f2, g2))
-      ax.set_yscale('log')
       ax.set_xticks(list(unique_gpus))
       ax.set_yticks([1e-3, 1e-2, 1e-1, 1e0])
-      # Set Scale
+
       # Set labels and title
       ax.set_xlabel('Number of GPUs')
       ax.set_ylabel('Time')
@@ -112,8 +101,14 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
       for x_value in unique_gpus:
         ax.axvline(x=x_value, color='gray', linestyle='--', alpha=0.5)
 
+
+
+      # Set y-axis ticks to be formatted as 10^(-values)
+      ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True, useOffset=False))
+      ax.tick_params(axis='y', which='both', labelleft=True, labelright=False)
+
       # Add legend
-    ax.legend(loc='lower right')
+      ax.legend()
 
     # Remove any unused subplots
     for i in range(num_subplots, num_rows * num_cols):
@@ -123,13 +118,9 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
     fig.tight_layout()
 
     # Display the plot
-    if output is None:
-      plt.show()
-    else:
-      transprency = False if output.endswith("png") else True
-      plt.savefig(output, bbox_inches='tight', transparent=transprency)
+    plt.show()
 
-def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=False, figure_size=(6, 4),output=None):
+def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=False, figure_size=(6, 4)):
 
   # Filter methods that do not have the gpu size
   for method, df in dataframes.items():
@@ -154,7 +145,6 @@ def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=Fa
     ax = axs[i]  # Select the current subplot
     
     data_sizes = []
-    times = []
     
     # Plot the data for each method
     for method, df in dataframes.items():
@@ -189,41 +179,33 @@ def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=Fa
           sorted_dfs.append(group.iloc[0])
         
         sorted_df = pd.DataFrame(sorted_dfs)
-        times.extend(sorted_df["time"].values)
-
         label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
         
         ax.plot(sorted_df['x'].values, sorted_df['time'], marker='o', linestyle='-', label=label)
     
-    # add title data size
-    f10 = lambda a: np.log10(a)
-    g10 = lambda b: b**10
     # add title nb of gpus
     ax.set_title(f"Number of GPUs: {gpu_size}")
     # Set x-axis ticks exactly at the provided data size values
+    ax.set_yscale('log')
     data_sizes = list(dict.fromkeys(data_sizes))
     data_sizes.sort()
-    
-    # Set limits
-    ax.set_xlim([ (19 * min(data_sizes) // 20), (21 * max(data_sizes) // 20)])
-    ax.set_ylim([1e-4, 2e1])
-    # Set scale
-    ax.set_xscale('function', functions=(f10, g10))
-    ax.set_yscale('log')
-    # Set ticks
-    ax.set_yticks([1e-3, 1e-2, 1e-1, 1e0,1e1])
-
-    # Set labels and title
-    ax.set_xlabel('Data size (pixels³)')
-    ax.set_ylabel('Time (ms)')
     ax.set_xticks(data_sizes)
+    ax.set_yticks([1e-3, 1e-2, 1e-1, 1e0])
+    
+    # Set labels and title
+    ax.set_xlabel('Data Size')
+    ax.set_ylabel('Time')
     
     # Add a constant dotted line along the Y-axis at each X point
     for x_value in data_sizes:
       ax.axvline(x=x_value, color='gray', linestyle='--', alpha=0.5)
     
+    # Set y-axis ticks to be formatted as 10^(-values)
+    ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True, useOffset=False))
+    ax.tick_params(axis='y', which='both', labelleft=True, labelright=False)
+    
     # Add legend
-  ax.legend(loc='lower right')
+    ax.legend()
   
   # Remove any unused subplots
   for i in range(num_subplots, num_rows * num_cols):
@@ -232,12 +214,8 @@ def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=Fa
   # Adjust the spacing between subplots
   fig.tight_layout()
   
-  # Display the plot transparent background
-  if output is None:
-    plt.show()
-  else:
-    transprency = False if output.endswith("png") else True
-    plt.savefig(output, bbox_inches='tight', transparent=transprency)
+  # Save the plot
+  plt.savefig("plot.png")
 
 def clean_up_csv(csv_files):
     dataframes = {}
@@ -307,8 +285,7 @@ if __name__=="__main__":
     parser.add_argument('-fs', '--figure_size', nargs=2, type=int, help='Figure size')
     # use node names in labels
     parser.add_argument('-nl', '--nodes_in_label', action='store_true', help='Use node names in labels')
-    # output file 
-    parser.add_argument('-o', '--output', help='Output file' , default=None)
+    
     args = parser.parse_args()
 
     simple_plot = {}
@@ -323,6 +300,6 @@ if __name__=="__main__":
       sys.exit(1)
       
     if args.gpus is not None:
-      plot_by_data_size(dataframes, simple_plot, args.gpus, args.nodes_in_label, args.figure_size,args.output)
+      plot_by_data_size(dataframes, simple_plot, args.gpus, args.nodes_in_label, args.figure_size)
     if args.data_size is not None:
-      plot_by_gpus(dataframes, simple_plot, args.data_size, args.nodes_in_label, args.figure_size,args.output)
+      plot_by_gpus(dataframes, simple_plot, args.data_size, args.nodes_in_label, args.figure_size)
