@@ -7,7 +7,7 @@ import pandas as pd
 import os
 import seaborn as sns
 sns.plotting_context("poster")
-sns.set(font_scale=1.4)
+plt.rcParams.update({'font.size': 10})
 # To be used to plot the CSV comming from the benchmarks
 # Usage example
 # python plotter.py --csv_files JAX.csv JAXDECOMP.csv --gpus 4 8 16 --simple_plot JAX --figure_size 6 4 --nodes_in_label -o output.{png/pdf}
@@ -126,118 +126,142 @@ def plot_by_gpus(dataframes, simple_plot, fixed_data_size,nodes_in_label=False,f
     if output is None:
       plt.show()
     else:
-      transprency = False if output.endswith("png") else True
+      transprency = True
       plt.savefig(output, bbox_inches='tight', transparent=transprency)
 
-def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=False, figure_size=(6, 4),output=None):
+def plot_by_data_size(dataframes, simple_plot, fixed_gpu_size, nodes_in_label=False, figure_size=(6, 4), output=None):
+    # Set smaller font size for all text in the plot
+    plt.rcParams.update({'font.size': 10})
 
-  # Filter methods that do not have the gpu size
-  for method, df in dataframes.items():
-    if df[df['gpus'] == int(fixed_gpu_size[0])].empty:
-      continue
-  # filter gpu size not contained in the data
-  fixed_gpu_size = [gpu for gpu in fixed_gpu_size if not dataframes[list(dataframes.keys())[0]][dataframes[list(dataframes.keys())[0]]['gpus'] == int(gpu)].empty]
-  # Calculate the number of subplots based on the number of GPU sizes
-  num_subplots = len(fixed_gpu_size)
-  # Calculate the number of rows and columns for the subplots
-  num_rows = int(np.ceil(np.sqrt(num_subplots)))
-  num_cols = int(np.ceil(num_subplots / num_rows))
-  
-  # Create the subplots
-  fig, axs = plt.subplots(num_rows, num_cols, figsize=figure_size)
-  if num_subplots > 1:
-    axs = axs.flatten()  # Flatten the axs array for easier indexing
-  else:
-    axs = [axs]
-  # Plot the data for each GPU size
-  for i, gpu_size in enumerate(fixed_gpu_size):
-    ax = axs[i]  # Select the current subplot
-    
-    data_sizes = []
-    times = []
-    
-    # Plot the data for each method
+    # Define a color cycle with one color as violet
+    color_cycle = ['cyan', 'magenta', 'yellow', 'green', 'red', 'blue', 'violet']
+
+    # Filter methods that do not have the GPU size
     for method, df in dataframes.items():
-      # Filter for the chosen number of GPUs
-      df = df[df['gpus'] == int(gpu_size)]
-      if df.empty:
-        continue
-      # Sort by data size
-      df = df.sort_values(by=['x'])
-      data_sizes.extend(df['x'].values)
-      
-      # Filter by backend and plot one line for each backend
-      if simple_plot.get(method) is not None:
-        ax.plot(df['x'].values, df['time'], marker='o', linestyle='-', label=f"{method}")
-        continue
-      
-      for backend in ['MPI', 'NCCL']:
-        df_backend = df[df['backend'] == backend]
-        
-        if df_backend.empty:
-          continue
-        
-        # Get the fastest decomposition (number of GPUs and nodes must be fixed here)
-        df_decomp = df_backend.groupby(['x', 'y', 'z', 'backend','nodes'])
-        all_decomp = []
-        sorted_dfs = []
-        
-        for _, group in df_decomp:
-          group.sort_values(by=['time'], inplace=True, ascending=False)
-          for px, py in zip(group['px'].values, group['py'].values):
-            all_decomp.append(f"{px}x{py}")
-          sorted_dfs.append(group.iloc[0])
-        
-        sorted_df = pd.DataFrame(sorted_dfs)
-        times.extend(sorted_df["time"].values)
+        if df[df['gpus'] == int(fixed_gpu_size[0])].empty:
+            continue
 
-        label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
+    # Filter GPU sizes not contained in the data
+    fixed_gpu_size = [gpu for gpu in fixed_gpu_size if not dataframes[list(dataframes.keys())[0]][dataframes[list(dataframes.keys())[0]]['gpus'] == int(gpu)].empty]
+    
+    # Calculate the number of subplots based on the number of GPU sizes
+    num_subplots = len(fixed_gpu_size)
+    
+    # Calculate the number of rows and columns for the subplots
+    num_rows = int(np.ceil(np.sqrt(num_subplots)))
+    num_cols = int(np.ceil(num_subplots / num_rows))
+    
+    # Create the subplots
+    fig, axs = plt.subplots(num_rows, num_cols, figsize=figure_size)
+    fig.patch.set_alpha(0.0)  # Transparent figure background
+    
+    if num_subplots > 1:
+        axs = axs.flatten()  # Flatten the axs array for easier indexing
+    else:
+        axs = [axs]
+    
+    # Plot the data for each GPU size
+    for i, gpu_size in enumerate(fixed_gpu_size):
+        ax = axs[i]  # Select the current subplot
+        ax.patch.set_alpha(0.0)  # Transparent axes background
+        ax.grid(False)  # Remove the grid
+        ax.spines['top'].set_color('white')
+        ax.spines['bottom'].set_color('white')
+        ax.spines['left'].set_color('white')
+        ax.spines['right'].set_color('white')
         
-        ax.plot(sorted_df['x'].values, sorted_df['time'], marker='o', linestyle='-', label=label)
-    
-    # add title data size
-    f10 = lambda a: np.log10(a)
-    g10 = lambda b: b**10
-    # add title nb of gpus
-    ax.set_title(f"Number of GPUs: {gpu_size}")
-    # Set x-axis ticks exactly at the provided data size values
-    data_sizes = list(dict.fromkeys(data_sizes))
-    data_sizes.sort()
-    
-    # Set limits
-    ax.set_xlim([ (19 * min(data_sizes) // 20), (21 * max(data_sizes) // 20)])
-    ax.set_ylim([1e-4, 2e1])
-    # Set scale
-    ax.set_xscale('function', functions=(f10, g10))
-    ax.set_yscale('log')
-    # Set ticks
-    ax.set_yticks([1e-3, 1e-2, 1e-1, 1e0,1e1])
+        data_sizes = []
+        times = []
+        
+        # Plot the data for each method
+        color_index = 0
+        for method, df in dataframes.items():
+            # Filter for the chosen number of GPUs
+            df = df[df['gpus'] == int(gpu_size)]
+            if df.empty:
+                continue
+            
+            # Sort by data size
+            df = df.sort_values(by=['x'])
+            data_sizes.extend(df['x'].values)
+            
+            # Filter by backend and plot one line for each backend
+            if simple_plot.get(method) is not None:
+                ax.plot(df['x'].values, df['time'], marker='o', linestyle='-', label=f"{method}", color=color_cycle[color_index % len(color_cycle)])
+                color_index += 1
+                continue
+            
+            for backend in ['MPI', 'NCCL']:
+                df_backend = df[df['backend'] == backend]
+                if df_backend.empty:
+                    continue
+                
+                # Get the fastest decomposition (number of GPUs and nodes must be fixed here)
+                df_decomp = df_backend.groupby(['x', 'y', 'z', 'backend', 'nodes'])
+                all_decomp = []
+                sorted_dfs = []
+                
+                for _, group in df_decomp:
+                    group.sort_values(by=['time'], inplace=True, ascending=False)
+                    for px, py in zip(group['px'].values, group['py'].values):
+                        all_decomp.append(f"{px}x{py}")
+                    sorted_dfs.append(group.iloc[0])
+                
+                sorted_df = pd.DataFrame(sorted_dfs)
+                times.extend(sorted_df["time"].values)
 
-    # Set labels and title
-    ax.set_xlabel('Data size (pixels³)')
-    ax.set_ylabel('Time (ms)')
-    ax.set_xticks(data_sizes)
+                label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
+                
+                ax.plot(sorted_df['x'].values, sorted_df['time'], marker='o', linestyle='-', label=label, color=color_cycle[color_index % len(color_cycle)])
+                color_index += 1
+        
+        # Add title for number of GPUs
+        ax.set_title(f"Number of GPUs: {gpu_size}", color='white')
+        
+        # Set x-axis ticks exactly at the provided data size values
+        data_sizes = list(dict.fromkeys(data_sizes))
+        data_sizes.sort()
+        
+        # Set limits
+        ax.set_xlim([(19 * min(data_sizes) // 20), (21 * max(data_sizes) // 20)])
+        ax.set_ylim([1e-4, 2e1])
+        
+        # Set scale
+        f10 = lambda a: np.log10(a)
+        g10 = lambda b: b ** 10
+        ax.set_xscale('function', functions=(f10, g10))
+        ax.set_yscale('log')
+        
+        # Set ticks
+        ax.set_yticks([1e-3, 1e-2, 1e-1, 1e0, 1e1])
+        
+        # Set labels
+        ax.set_xlabel('Data size (pixels³)', color='white')
+        ax.set_ylabel('Time (ms)', color='white')
+        ax.set_xticks(data_sizes)
+        
+        # Add a constant dotted line along the Y-axis at each X point
+        for x_value in data_sizes:
+            ax.axvline(x=x_value, color='white', linestyle=':', alpha=0.5)
+        
+        # Add legend
+        ax.legend(loc='lower right', fontsize='small')
+        ax.tick_params(axis='y', which='both', labelleft=True, labelright=False, colors='white')
+        ax.tick_params(axis='x', colors='white')
     
-    # Add a constant dotted line along the Y-axis at each X point
-    for x_value in data_sizes:
-      ax.axvline(x=x_value, color='gray', linestyle='--', alpha=0.5)
+    # Remove any unused subplots
+    for i in range(num_subplots, num_rows * num_cols):
+        fig.delaxes(axs[i])
     
-    # Add legend
-  ax.legend(loc='lower right')
-  
-  # Remove any unused subplots
-  for i in range(num_subplots, num_rows * num_cols):
-    fig.delaxes(axs[i])
-  
-  # Adjust the spacing between subplots
-  fig.tight_layout()
-  
-  # Display the plot transparent background
-  if output is None:
-    plt.show()
-  else:
-    transprency = False if output.endswith("png") else True
-    plt.savefig(output, bbox_inches='tight', transparent=transprency)
+    # Adjust the spacing between subplots
+    fig.tight_layout()
+    
+    # Display the plot with transparent background
+    if output is None:
+        plt.show()
+    else:
+        plt.savefig(output, bbox_inches='tight', transparent=True, dpi=300)
+
 
 def clean_up_csv(csv_files):
     dataframes = {}
