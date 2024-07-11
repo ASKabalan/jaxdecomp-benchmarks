@@ -2,7 +2,7 @@ from functools import partial
 import re
 from jax.experimental import mesh_utils, multihost_utils
 from jax.sharding import Mesh, PartitionSpec as P
-# from cupy.cuda.nvtx import RangePush, RangePop
+from cupy.cuda.nvtx import RangePush, RangePop
 
 import jaxdecomp
 import jax.numpy as jnp
@@ -85,15 +85,15 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, output_path):
 
   with mesh:
     # Warm start
-    # RangePush("Warmup")
+    RangePush("Warmup")
     do_fft(global_array).block_until_ready()
-    # RangePop()
+    RangePop()
 
-    # RangePush("Actual FFT Call")
     before = time.perf_counter()
+    RangePush("Actual FFT Call")
     karray = do_fft(global_array).block_until_ready()
+    RangePop()
     after=time.perf_counter()
-    # RangePop()
 
   print(rank, 'took', after - before, 's')
   with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:

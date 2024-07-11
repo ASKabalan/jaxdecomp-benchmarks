@@ -142,16 +142,14 @@ def run_benchmark(global_shape, nb_nodes, output_path):
 
   #Warm start and get the HLO
   RangePush("Warmup")
-  hlo = do_fft.lower(original_array).compile().runtime_executable().hlo_modules(
-  )[0].to_string()
   do_fft(original_array).block_until_ready()
   RangePop()
   
-  RangePush("Acutal FFT Call")
   before = time.time()
+  RangePush("Acutal FFT Call")
   karray = do_fft(original_array).block_until_ready()
-  after = time.time()
   RangePop()
+  after = time.time()
   
 
   print(rank, 'took', after - before, 's')
@@ -160,13 +158,12 @@ def run_benchmark(global_shape, nb_nodes, output_path):
   rec_array = do_ifft(karray)
 
   if rank == 0:
-    print(f"HLO for FFT: {hlo}")
     # Let's test if things are like we expect
     diff = rec_array - karray
     print('maximum reconstruction difference', jnp.abs(diff).max())
     with open(f"{output_path}/mpi4jax.csv", 'a') as f:
       f.write(
-          f"{jax.process_index()},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
+          f"{rank},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
       )
 
   # Testing that the fft is indeed invertible
