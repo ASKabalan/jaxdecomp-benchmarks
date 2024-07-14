@@ -1,12 +1,14 @@
 import argparse
+import os
+import sys
+
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import ScalarFormatter
-import sys
 import pandas as pd
-import os
-from matplotlib.patches import FancyBboxPatch
 import seaborn as sns
+from matplotlib.patches import FancyBboxPatch
+from matplotlib.ticker import ScalarFormatter
+
 plt.rcParams.update({'font.size': 10})
 # To be used to plot the CSV comming from the benchmarks
 # Usage example
@@ -15,7 +17,6 @@ plt.rcParams.update({'font.size': 10})
 
 # You should have one CSV per framework, each csv can contain results from different number of nodes
 # for more info use python plotter.py -h
-
 
 sns.plotting_context("paper")
 
@@ -310,7 +311,7 @@ def plot_by_data_size(dataframes,
         fig.delaxes(axs[i])
 
     # Adjust the spacing between subplots
-    fig.tight_layout()   
+    fig.tight_layout()
     rect = FancyBboxPatch((0.1, 0.1),
                           0.8,
                           0.8,
@@ -340,15 +341,26 @@ def clean_up_csv(csv_files):
             nodes = int(file_split[1].split("node")[0])
 
         # Get pandas dataframe from csv file
-        df = pd.read_csv(csv_file, header=None, names=["rank", "x", "y", "z", "px", "py", "backend","nodes", "time"], index_col=False)
+        df = pd.read_csv(csv_file,
+                         header=None,
+                         names=[
+                             "rank", "x", "y", "z", "px", "py", "backend",
+                             "nodes", "time"
+                         ],
+                         index_col=False)
 
         # Group by the specified columns
-        grouped_df = df.groupby(["x", "y", "z", "px", "py", "backend","nodes"])
+        grouped_df = df.groupby(
+            ["x", "y", "z", "px", "py", "backend", "nodes"])
 
         # Create a list of DataFrames, each corresponding to a unique combination of columns
         sub_dfs = [group for _, group in grouped_df]
 
-        sub_dfs = [df.drop_duplicates(["rank","x", "y", "z", "px", "py", "backend","nodes"] , keep='last') for df in sub_dfs]
+        sub_dfs = [
+            df.drop_duplicates(
+                ["rank", "x", "y", "z", "px", "py", "backend", "nodes"],
+                keep='last') for df in sub_dfs
+        ]
 
         # Add a new column for the number of elements (number of GPUs used) in each subgroup
         num_gpu = [len(sub_df) for sub_df in sub_dfs]
@@ -362,7 +374,6 @@ def clean_up_csv(csv_files):
             # take the first row as the mean of the group
             mean_dfs.append(sub_df.iloc[0])
 
-
         # Create a new DataFrame with only the mean values
         mean_df = pd.DataFrame(mean_dfs)
 
@@ -375,8 +386,6 @@ def clean_up_csv(csv_files):
             dataframes[file_name] = pd.concat([dataframes[file_name], mean_df])
 
     return dataframes
-
-
 
 
 if __name__ == "__main__":

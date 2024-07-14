@@ -3,17 +3,17 @@ import jax
 jax.distributed.initialize()
 rank = jax.process_index()
 size = jax.process_count()
-from functools import partial
-import re
-from jax.experimental import mesh_utils, multihost_utils
-from jax.sharding import Mesh, PartitionSpec as P
-from cupy.cuda.nvtx import RangePush, RangePop
-
-import jaxdecomp
-import jax.numpy as jnp
-
-import time
 import argparse
+import re
+import time
+from functools import partial
+
+import jax.numpy as jnp
+import jaxdecomp
+from cupy.cuda.nvtx import RangePop, RangePush
+from jax.experimental import mesh_utils, multihost_utils
+from jax.sharding import Mesh
+from jax.sharding import PartitionSpec as P
 
 
 def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,

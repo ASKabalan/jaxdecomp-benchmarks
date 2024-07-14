@@ -3,21 +3,22 @@ import jax
 jax.distributed.initialize()
 rank = jax.process_index()
 size = jax.process_count()
-import jax.numpy as jnp
-
-import time
-from jax.experimental.pjit import pjit
-from jax.experimental import mesh_utils, multihost_utils
-from jax.sharding import Mesh, NamedSharding, PartitionSpec as P
-from functools import partial
-from cupy.cuda.nvtx import RangePush, RangePop
 import argparse
-from jax.experimental.shard_map import shard_map
-from jax import lax
 import os
+import time
+from functools import partial
+
+import jax.numpy as jnp
+from cupy.cuda.nvtx import RangePop, RangePush
+from jax import lax
+from jax.experimental import mesh_utils, multihost_utils
+from jax.experimental.pjit import pjit
+from jax.experimental.shard_map import shard_map
+from jax.sharding import Mesh, NamedSharding
+from jax.sharding import PartitionSpec as P
 
 
-def run_benchmark(pdims, global_shape, nb_nodes,precision, output_path):
+def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
 
     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[

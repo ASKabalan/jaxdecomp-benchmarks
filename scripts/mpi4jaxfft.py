@@ -1,13 +1,15 @@
 import jax
 
 jax.distributed.initialize()
-from mpi4py import MPI
-import jax.numpy as jnp
-import mpi4jax
-import time
-from cupy.cuda.nvtx import RangePush, RangePop
 import argparse
 import os
+import time
+
+import jax.numpy as jnp
+import mpi4jax
+from cupy.cuda.nvtx import RangePop, RangePush
+from mpi4py import MPI
+
 # Create communicators
 world = MPI.COMM_WORLD
 rank = world.Get_rank()
@@ -116,7 +118,8 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, output_path):
     """ Run the benchmark
     """
 
-    cart_comm = MPI.COMM_WORLD.Create_cart(dims=list(pdims), periods=[True, True])
+    cart_comm = MPI.COMM_WORLD.Create_cart(dims=list(pdims),
+                                           periods=[True, True])
     comms = [cart_comm.Sub([True, False]), cart_comm.Sub([False, True])]
 
     backend = "MPI4JAX"
@@ -184,7 +187,6 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, output_path):
     print('maximum reconstruction difference', jnp.abs(diff).max())
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='NBody MPI4JAX Benchmark')
     parser.add_argument('-g',
@@ -231,7 +233,7 @@ if __name__ == "__main__":
         print("Please provide either local_shape or global_shape")
         parser.print_help()
         exit(0)
-    
+
     if args.precision == "float32":
         jax.config.update("jax_enable_x64", False)
     elif args.precision == "float64":
@@ -246,4 +248,4 @@ if __name__ == "__main__":
     os.makedirs(output_path, exist_ok=True)
     pdims = [int(x) for x in args.pdims.split("x")]
 
-    run_benchmark(global_shape, nb_nodes, pdims, args.precision , output_path)
+    run_benchmark(global_shape, nb_nodes, pdims, args.precision, output_path)

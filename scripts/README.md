@@ -33,6 +33,6 @@ srun python benchmarks/pfft3d.py -l 1024 -p 2x4 -b NCCL -o path_for_csv_folder
 # To compare with other frameworks
 srun python benchmarks/jaxfft.py -g 1024 -o path_for_csv_folder
 srun python benchmarks/mpi4jafft.py -g 1024 -o path_for_csv_folder
-# For more info 
+# For more info
 srun python benchmarks/pfft3d.py -h
 ```

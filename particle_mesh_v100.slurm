@@ -1,26 +1,26 @@
 #!/bin/bash
-##########################################
-## SELECT EITHER tkc@a100 OR tkc@v100 ##
-##########################################
-#SBATCH --account tkc@a100
-##########################################
+########################################## 
+## SELECT EITHER tkc@a100 OR tkc@v100 ## 
+########################################## 
+#SBATCH --account tkc@v100
+########################################## 
 #SBATCH --job-name=Particle-Mesh   # nom du job
 # Il est possible d'utiliser une autre partition que celle par default
 # en activant l'une des 5 directives suivantes :
-##########################################
-## SELECT EITHER a100  or v100-32g   ##
-##########################################
-#SBATCH -C a100
-##########################################
+########################################## 
+## SELECT EITHER a100  or v100-32g   ## 
+########################################## 
+#SBATCH -C v100-32g
+########################################## 
 #******************************************
-##########################################
+########################################## 
 ## SELECT Number of nodes and GPUs per node
 ## For A100 ntasks-per-node and gres=gpu should be 8
 ## For V100 ntasks-per-node and gres=gpu should be 4
-##########################################
+########################################## 
 #SBATCH --nodes=2                    # nombre de noeud
-#SBATCH --ntasks-per-node=8          # nombre de tache MPI par noeud (= nombre de GPU par noeud)
-#SBATCH --gres=gpu:8                # nombre de GPU par nÅ“ud (max 8 avec gpu_p2, gpu_p5)
+#SBATCH --ntasks-per-node=4          # nombre de tache MPI par noeud (= nombre de GPU par noeud)
+#SBATCH --gres=gpu:4                # nombre de GPU par nÅ“ud (max 8 avec gpu_p2, gpu_p5)
 ##########################################
 ## Le nombre de CPU par tache doit etre adapte en fonction de la partition utilisee. Sachant
 ## qu'ici on ne reserve qu'un seul GPU par tache (soit 1/4 ou 1/8 des GPU du noeud suivant
@@ -127,10 +127,10 @@ ln -s $JOBSCRATCH /tmp/nvidia
 
 declare -A pdims_table
 # Define the table
-pdims_table[4]="2x2"
+pdims_table[4]="2x2 1x4 4x1"
 pdims_table[8]="2x4 1x8 8x1 4x2"
-pdims_table[16]="4x4 2x8 8x2"
-pdims_table[32]="4x8 8x4 2x16 16x2"
+pdims_table[16]="4x4 2x8 8x2 1x16 16x1"
+pdims_table[32]="4x8 8x4 2x16 16x2 1x32 32x1" 
 pdims_table[64]="8x8 4x16 16x4 1x64 64x1 2x32 32x2"
 pdims_table[128]="8x16 16x8 4x32 32x4 1x128 128x1 2x64 64x2"
 pdims_table[160]="8x20 20x8 16x10 10x16 5x32 32x5 1x160 160x1 2x80 80x2 4x40 40x4"
