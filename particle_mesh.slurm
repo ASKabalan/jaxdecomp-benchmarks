@@ -55,7 +55,7 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-
+module load nvidia-nsight-systems
 
 echo "The number of nodes allocated for this job is: $num_nodes"
 echo "The number of GPUs allocated for this job is: $nb_gpus"
@@ -116,9 +116,12 @@ function plaunch() {
 # Echo des commandes lancees
 set -x
 
-# Pour la partition "gpu_p5", le code doit etre compile avec les modules compatibles
-# Execution du code avec binding via bind_gpu.sh : 1 GPU par tache
- 
+# Pour ne pas utiliser le /tmp
+export TMPDIR=$JOBSCRATCH
+# Pour contourner un bogue dans les versions actuelles de Nsight Systems
+# il est également nécessaire de créer un lien symbolique permettant de
+# faire pointer le répertoire /tmp/nvidia vers TMPDIR
+ln -s $JOBSCRATCH /tmp/nvidia
 
 
 
