@@ -1,3 +1,7 @@
+import jax
+jax.distributed.initialize()
+rank = jax.process_index()
+size = jax.process_count()
 from functools import partial
 import re
 from jax.experimental import mesh_utils, multihost_utils
@@ -6,13 +10,9 @@ from cupy.cuda.nvtx import RangePush, RangePop
 
 import jaxdecomp
 import jax.numpy as jnp
-import jax
+
 import time
 import argparse
-
-jax.distributed.initialize()
-rank = jax.process_index()
-size = jax.process_count()
 
 
 def run_benchmark(pdims, global_shape, backend, nb_nodes, output_path):
