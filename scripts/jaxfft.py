@@ -17,7 +17,7 @@ from jax import lax
 import os
 
 
-def run_benchmark(pdims, global_shape, nb_nodes, output_path):
+def run_benchmark(pdims, global_shape, nb_nodes,precision, output_path):
 
     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[
@@ -99,7 +99,7 @@ def run_benchmark(pdims, global_shape, nb_nodes, output_path):
     print(jax.process_index(), 'fft took', after - before, 's')
     with open(f"{output_path}/jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
         )
 
     # And now, let's do the inverse FFT
@@ -121,7 +121,7 @@ def run_benchmark(pdims, global_shape, nb_nodes, output_path):
 
     with open(f"{output_path}/jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},IFFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
         )
 
     if jax.process_index() == 0:
@@ -156,6 +156,11 @@ if __name__ == "__main__":
                         type=str,
                         help='Output path',
                         default=".")
+    parser.add_argument('-pr',
+                        '--precision',
+                        type=str,
+                        help='Precision',
+                        default="float32")
 
     args = parser.parse_args()
 
@@ -180,6 +185,15 @@ if __name__ == "__main__":
     output_path = args.output_path
     os.makedirs(output_path, exist_ok=True)
 
-    run_benchmark(pdims, global_shape, nb_nodes, output_path)
+    if args.precision == "float32":
+        jax.config.update("jax_enable_x64", False)
+    elif args.precision == "float64":
+        jax.config.update("jax_enable_x64", True)
+    else:
+        print("Precision should be either float32 or float64")
+        parser.print_help()
+        exit(0)
+
+    run_benchmark(pdims, global_shape, nb_nodes, args.precision, output_path)
 
 jax.distributed.shutdown()

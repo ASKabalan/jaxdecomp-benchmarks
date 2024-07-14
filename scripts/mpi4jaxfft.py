@@ -112,9 +112,11 @@ def normal(key, shape, comms=None):
                              list(shape[2:]))
 
 
-def run_benchmark(global_shape, nb_nodes, pdims, output_path):
+def run_benchmark(global_shape, nb_nodes, pdims, precision, output_path):
+    """ Run the benchmark
+    """
 
-    cart_comm = MPI.COMM_WORLD.Create_cart(dims=[2, 2], periods=[True, True])
+    cart_comm = MPI.COMM_WORLD.Create_cart(dims=list(pdims), periods=[True, True])
     comms = [cart_comm.Sub([True, False]), cart_comm.Sub([False, True])]
 
     backend = "MPI4JAX"
@@ -157,7 +159,7 @@ def run_benchmark(global_shape, nb_nodes, pdims, output_path):
 
     with open(f"{output_path}/mpi4jax.csv", 'a') as f:
         f.write(
-            f"{rank},FFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
+            f"{rank},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
         )
 
     print(rank, 'took', after - before, 's')
@@ -175,14 +177,12 @@ def run_benchmark(global_shape, nb_nodes, pdims, output_path):
 
     with open(f"{output_path}/mpi4jax.csv", 'a') as f:
         f.write(
-            f"{rank},IFFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
+            f"{rank},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
         )
     # Let's test if things are like we expect
-    diff = rec_array - karray
+    diff = original_array - rec_array
     print('maximum reconstruction difference', jnp.abs(diff).max())
 
-    # Testing that the fft is indeed invertible
-    print("I'm ", rank, abs(rec_array.real - original_array).mean())
 
 
 if __name__ == "__main__":
@@ -212,6 +212,11 @@ if __name__ == "__main__":
                         type=str,
                         help='Output path',
                         default=".")
+    parser.add_argument('-pr',
+                        '--precision',
+                        type=str,
+                        help='Precision',
+                        default="float32")
 
     args = parser.parse_args()
 
@@ -226,10 +231,19 @@ if __name__ == "__main__":
         print("Please provide either local_shape or global_shape")
         parser.print_help()
         exit(0)
-    print(f"shape {global_shape}")
+    
+    if args.precision == "float32":
+        jax.config.update("jax_enable_x64", False)
+    elif args.precision == "float64":
+        jax.config.update("jax_enable_x64", True)
+    else:
+        print("Precision should be either float32 or float64")
+        parser.print_help()
+        exit(0)
+
     nb_nodes = args.nb_nodes
     output_path = args.output_path
     os.makedirs(output_path, exist_ok=True)
     pdims = [int(x) for x in args.pdims.split("x")]
 
-    run_benchmark(global_shape, nb_nodes, pdims, output_path)
+    run_benchmark(global_shape, nb_nodes, pdims, args.precision , output_path)

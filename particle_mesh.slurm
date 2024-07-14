@@ -138,7 +138,7 @@ pdims_table[160]="8x20 20x8 16x10 10x16 5x32 32x5 1x160 160x1 2x80 80x2 4x40 40x
 
 # mpch=(128 256 512 1024 2048 4096)
 grid=(16 32 64 128 256 512  1024 2048 4096)
-
+precisions=(float32 float64)
 pdim="${pdims_table[$nb_gpus]}"
 echo "pdims: $pdim"
 
@@ -163,23 +163,29 @@ out_dir="out_bench/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
-for g in "${grid[@]}"; do
-    for pd in $pdim; do
-        slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir
-        slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir
-        slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
-        slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
+for pr in "${precisions[@]}"; do
+    for g in "${grid[@]}"; do
+        for pd in $pdim; do
+            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+        done
     done
 done
+
 
 out_dir="out_prof/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
-for g in "${grid[@]}"; do
-    for pd in $pdim; do
-        plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir
-        plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir
-        plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
+for pr in "${precisions[@]}"; do
+    for g in "${grid[@]}"; do
+        for pd in $pdim; do
+            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+        done
     done
 done
