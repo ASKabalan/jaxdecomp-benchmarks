@@ -33,7 +33,7 @@
 #SBATCH --time=02:00:00              # temps d'execution maximum demande (HH:MM:SS)
 #SBATCH --output=2n-big_boy.out # nom du fichier de sortie
 #SBATCH --error=2n-big_boy.out  # nom du fichier d'erreur (ici commun avec la sortie)
-
+#SBATCH --exclusive                  # ressources dediees
 # Nettoyage des modules charges en interactif et herites par defaut
 num_nodes=$SLURM_JOB_NUM_NODES
 num_gpu_per_node=$SLURM_NTASKS_PER_NODE

@@ -98,19 +98,34 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, output_path):
   print(rank, 'took', after - before, 's')
   with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
     f.write(
-        f"{jax.process_index()},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+        f"{jax.process_index()},FFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
     )
 
   # And now, let's do the inverse FFT
 
   with mesh:
+    RangePush("IFFT Warmup")
     rec_array=do_ifft(karray).block_until_ready()
+    RangePop()
+
+    before = time.perf_counter()
+    RangePush("Actual IFFT Call")
+    rec_array = do_ifft(karray).block_until_ready()
+    RangePop()
+    after = time.perf_counter()
+
     # make sure get_diff is called inside the mesh context
     # it is done on non fully addressable global arrays in needs the mesh and to be jitted
     diff = get_diff(global_array, rec_array)
 
   if jax.process_index() == 0:
     print(f"Maximum reconstruction diff {diff}")
+
+  with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
+    f.write(
+        f"{jax.process_index()},IFFT,{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+    )
+    
 
 
 
