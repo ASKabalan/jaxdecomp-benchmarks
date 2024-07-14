@@ -1,18 +1,18 @@
-from mpi4py import MPI
 import jax
+jax.distributed.initialize()
+from mpi4py import MPI
 import jax.numpy as jnp
 import mpi4jax
 import time
 from cupy.cuda.nvtx import RangePush, RangePop
 import argparse
-
+import os
 # Create communicators
 world = MPI.COMM_WORLD
 rank = world.Get_rank()
 size = world.Get_size()
 
-cart_comm = MPI.COMM_WORLD.Create_cart(dims=[2, 2], periods=[True, True])
-comms = [cart_comm.Sub([True, False]), cart_comm.Sub([False, True])]
+
 
 if rank == 0:
   print("Communication setup done!")
@@ -108,11 +108,16 @@ def normal(key, shape, comms=None):
   nx = comms[0].Get_size()
   ny = comms[1].Get_size()
 
+  print(shape)
   return jax.random.normal(key,
                            [shape[0] // nx, shape[1] // ny] + list(shape[2:]))
 
 
-def run_benchmark(global_shape, nb_nodes, output_path):
+def run_benchmark(global_shape, nb_nodes, pdims , output_path):
+
+  cart_comm = MPI.COMM_WORLD.Create_cart(dims=[2, 2], periods=[True, True])
+  comms = [cart_comm.Sub([True, False]), cart_comm.Sub([False, True])]
+
   backend = "MPI4JAX"
   # Setup random keys
   master_key = jax.random.PRNGKey(42)
@@ -142,16 +147,14 @@ def run_benchmark(global_shape, nb_nodes, output_path):
 
   #Warm start and get the HLO
   RangePush("Warmup")
-  hlo = do_fft.lower(original_array).compile().runtime_executable().hlo_modules(
-  )[0].to_string()
   do_fft(original_array).block_until_ready()
   RangePop()
   
-  RangePush("Acutal FFT Call")
   before = time.time()
+  RangePush("Actual FFT Call")
   karray = do_fft(original_array).block_until_ready()
-  after = time.time()
   RangePop()
+  after = time.time()
   
 
   print(rank, 'took', after - before, 's')
@@ -159,15 +162,13 @@ def run_benchmark(global_shape, nb_nodes, output_path):
   # And now, let's do the inverse FFT
   rec_array = do_ifft(karray)
 
-  if rank == 0:
-    print(f"HLO for FFT: {hlo}")
-    # Let's test if things are like we expect
-    diff = rec_array - karray
-    print('maximum reconstruction difference', jnp.abs(diff).max())
-    with open(f"{output_path}/mpi4jax.csv", 'a') as f:
-      f.write(
-          f"{jax.process_index()},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
-      )
+  # Let's test if things are like we expect
+  diff = rec_array - karray
+  print('maximum reconstruction difference', jnp.abs(diff).max())
+  with open(f"{output_path}/mpi4jax.csv", 'a') as f:
+    f.write(
+        f"{rank},{global_shape[0]},{global_shape[1]},{global_shape[2]},{comms[0].Get_size()},{comms[1].Get_size()},{backend},{nb_nodes},{after - before}\n"
+    )
 
   # Testing that the fft is indeed invertible
   print("I'm ", rank, abs(rec_array.real - original_array).mean())
@@ -175,23 +176,26 @@ def run_benchmark(global_shape, nb_nodes, output_path):
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='NBody MPI4JAX Benchmark')
-  parser.add_argument('-g', '--global_shape', type=int, help='Global shape', default=256)
-  parser.add_argument('-l', '--local_shape', type=int, help='Local shape', default=128)
+  parser.add_argument('-g', '--global_shape', type=int, help='Global shape', default=None)
+  parser.add_argument('-l', '--local_shape', type=int, help='Local shape', default=None)
   parser.add_argument('-n', '--nb_nodes', type=int, help='Number of nodes', default=1)
+  parser.add_argument('-p', '--pdims', type=str, help='GPU grid', required=True)
   parser.add_argument('-o', '--output_path', type=str, help='Output path', default=".")
   
   args = parser.parse_args()
 
   if args.local_shape is not None:
-      global_shape = (args.global_shape * jax.devices(), args.global_shape * jax.devices(), args.global_shape * jax.devices())
+      global_shape = (args.global_shape * jax.device_count(), args.global_shape * jax.device_count(), args.global_shape * jax.devices())
   elif args.global_shape is not None:
       global_shape = (args.global_shape, args.global_shape, args.global_shape)
   else:
       print("Please provide either local_shape or global_shape")
       parser.print_help()
       exit(0)
-
+  print(f"shape {global_shape}")
   nb_nodes = args.nb_nodes
   output_path = args.output_path
+  os.makedirs(output_path, exist_ok=True)
+  pdims = [int(x) for x in args.pdims.split("x")]
 
-  run_benchmark(global_shape, nb_nodes, output_path)
+  run_benchmark(global_shape, nb_nodes, pdims , output_path)

@@ -1,23 +1,19 @@
 import jax
 jax.distributed.initialize()
+rank = jax.process_index()
+size = jax.process_count()
 import jax.numpy as jnp
 
 import time
 from jax.experimental.pjit import pjit
 from jax.experimental import mesh_utils, multihost_utils
-#from mpi4py import MPI
 from jax.sharding import Mesh, NamedSharding, PartitionSpec as P
 from functools import partial
-# from cupy.cuda.nvtx import RangePush, RangePop
+from cupy.cuda.nvtx import RangePush, RangePop
 import argparse
 from jax.experimental.shard_map import shard_map
-#comm = MPI.COMM_WORLD
-#rank = comm.Get_rank()
-#size = comm.Get_size()
 from jax import lax
 import os
-
-
 
 def run_benchmark(pdims,global_shape,nb_nodes, output_path):
 
@@ -74,9 +70,9 @@ def run_benchmark(pdims,global_shape,nb_nodes, output_path):
           are tranposed.
       """
       mesh = jnp.fft.ifft(mesh)
-      mesh = lax.all_to_all(mesh, 'b', 0, 0)
+      mesh = lax.all_to_all(mesh, 'a', 0, 0,  tiled=True)
       mesh = jnp.fft.ifft(mesh)
-      mesh = lax.all_to_all(mesh, 'a', 0, 0)
+      mesh = lax.all_to_all(mesh, 'b', 0, 0,  tiled=True)
       return jnp.fft.ifft(mesh)
 
 
@@ -98,15 +94,15 @@ def run_benchmark(pdims,global_shape,nb_nodes, output_path):
 
   with mesh:
     # warm start and get hlo
-    # RangePush("Warmup")
+    RangePush("Warmup")
     do_fft(global_array).block_until_ready()
-    # RangePop()
+    RangePop()
 
-    # RangePush("Actual FFT Call")
     before = time.perf_counter()
+    RangePush("Actual FFT Call")
     karray = do_fft(global_array).block_until_ready()
+    RangePop()
     after = time.perf_counter()
-    # RangePop()
 
   print(jax.process_index(), 'took', after - before, 's')
   with open(f"{output_path}/jaxfft.csv", 'a') as f:

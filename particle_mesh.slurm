@@ -55,13 +55,32 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-
+module load nvidia-nsight-systems
 
 echo "The number of nodes allocated for this job is: $num_nodes"
 echo "The number of GPUs allocated for this job is: $nb_gpus"
 
 export EQX_ON_ERROR=nan
 export CUDA_ALLOC=1
+
+function profile_python() {
+    if [ $# -lt 1 ]; then
+        echo "Usage: profile_python <python_script> [arguments for the script]"
+        return 1
+    fi
+
+    local script_name=$(basename "$2" .py)
+    local output_dir="traces/$script_name"
+
+    if [ $OUTPUT_FOLDER_ARGS -eq 1 ]; then
+        local args=$(echo "${@:3}" | tr ' ' '_')
+        output_dir="traces/$script_name/$args"
+    fi
+
+    mkdir -p "$output_dir"
+
+    srun nsys profile -t cuda,nvtx,osrt,mpi -o "$output_dir/report_rank%q{SLURM_PROCID}" python "$@" > "$output_dir/$script_name.out" 2> "$output_dir/$script_name.err" || true
+}
 
 function run_python() {
     if [ $# -lt 1 ]; then
@@ -89,13 +108,20 @@ function slaunch() {
     run_python "$@"
 }
 
+function plaunch() {
+    profile_python "$@"
+}
+
 
 # Echo des commandes lancees
 set -x
 
-# Pour la partition "gpu_p5", le code doit etre compile avec les modules compatibles
-# Execution du code avec binding via bind_gpu.sh : 1 GPU par tache
- 
+# Pour ne pas utiliser le /tmp
+export TMPDIR=$JOBSCRATCH
+# Pour contourner un bogue dans les versions actuelles de Nsight Systems
+# il est également nécessaire de créer un lien symbolique permettant de
+# faire pointer le répertoire /tmp/nvidia vers TMPDIR
+ln -s $JOBSCRATCH /tmp/nvidia
 
 
 
@@ -133,10 +159,7 @@ else
     gpu_name="v100"
 fi
 
-out_dir="out/$gpu_name/$nb_gpus"
-
-
-
+out_dir="out_bench/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
@@ -145,5 +168,18 @@ for g in "${grid[@]}"; do
         slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir
         slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir
         slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
+        slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
+    done
+done
+
+out_dir="out_prof/$gpu_name/$nb_gpus"
+
+echo "Output dir is  : $out_dir"
+
+for g in "${grid[@]}"; do
+    for pd in $pdim; do
+        plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir
+        plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir
+        plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir
     done
 done
