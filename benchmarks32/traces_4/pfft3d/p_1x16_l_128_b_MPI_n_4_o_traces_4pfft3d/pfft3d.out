@@ -1,4 +1,0 @@
-Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3), cuda(id=4), cuda(id=5), cuda(id=6), cuda(id=7), cuda(id=8), cuda(id=9), cuda(id=10), cuda(id=11), cuda(id=12), cuda(id=13), cuda(id=14), cuda(id=15)]
-Global dims (2048, 2048, 2048), pdims (1, 16) , Backend MPI local array shape (2048, 128, 2048) global array shape (2048, 2048, 2048)
-Sharding :
-NamedSharding(mesh=Mesh('z': 1, 'y': 16), spec=PartitionSpec('z', 'y'))

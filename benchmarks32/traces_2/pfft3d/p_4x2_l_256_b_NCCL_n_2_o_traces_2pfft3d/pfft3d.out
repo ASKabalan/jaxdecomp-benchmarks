@@ -1,4 +1,0 @@
-Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3), cuda(id=4), cuda(id=5), cuda(id=6), cuda(id=7)]
-Global dims (2048, 2048, 2048), pdims (4, 2) , Backend NCCL local array shape (512, 1024, 2048) global array shape (2048, 2048, 2048)
-Sharding :
-NamedSharding(mesh=Mesh('z': 4, 'y': 2), spec=PartitionSpec('z', 'y'))

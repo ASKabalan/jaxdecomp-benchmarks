@@ -1,9 +1,0 @@
-Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3)]
-Global dims (128, 128, 128), pdims (4, 1) , Backend MPI local array shape (32, 128, 128) global array shape (128, 128, 128)
-Sharding :
-NamedSharding(mesh=Mesh('z': 4, 'y': 1), spec=PartitionSpec('z', 'y'))
-0 took 0.000524127040989697 s
-1 took 0.000571461976505816 s
-3 took 0.0005335719906724989 s
-2 took 0.0005613559624180198 s
-Maximum reconstruction diff 3.3425603760406375e-06

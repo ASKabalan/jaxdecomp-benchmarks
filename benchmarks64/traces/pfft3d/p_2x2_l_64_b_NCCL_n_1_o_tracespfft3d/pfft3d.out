@@ -1,9 +1,0 @@
-Devices [cuda(id=0), cuda(id=1), cuda(id=2), cuda(id=3)]
-Global dims (256, 256, 256), pdims (2, 2) , Backend NCCL local array shape (128, 128, 256) global array shape (256, 256, 256)
-Sharding :
-NamedSharding(mesh=Mesh('z': 2, 'y': 2), spec=PartitionSpec('z', 'y'))
-1 took 0.00356306997127831 s
-0 took 0.003659697948023677 s
-3 took 0.003800514037720859 s
-2 took 0.003796965000219643 s
-Maximum reconstruction diff 3.1162931884723214e-15
