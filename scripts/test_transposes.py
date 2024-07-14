@@ -132,22 +132,22 @@ def test_tranpose(pdims, global_shape):
     global_array, mesh = create_spmd_array(global_shape, pdims)
 
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_parts=P('z', 'y'), out_parts=P('y', 'z'))
+    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeXtoY(x):
         return lax.all_to_all(x, 'z', 0, 0, tiled=True)
     
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_parts=P('y', 'z'), out_parts=P('z', 'y'))
+    @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeYtoX(x):
         return lax.all_to_all(x, 'y', 0, 0, tiled=True)
     
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_parts=P('z', 'y'), out_parts=P('y', 'z'))
+    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeYtoZ(x):
         return lax.all_to_all(x, 'z', 0, 0, tiled=True)
     
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_parts=P('y', 'z'), out_parts=P('z', 'y'))
+    @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeZtoY(x):
         return lax.all_to_all(x, 'y', 0, 0, tiled=True)
     
