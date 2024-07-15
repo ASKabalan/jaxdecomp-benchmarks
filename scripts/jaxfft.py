@@ -65,7 +65,7 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
         mesh = jnp.fft.fft(mesh)
         mesh = jax_transposeXtoY(mesh)
         mesh = jnp.fft.fft(mesh)
-        mesh = jax_transposeYtoX(mesh)
+        mesh = jax_transposeYtoZ(mesh)
         return jnp.fft.fft(mesh)  # Note the output is transposed # [z, x, y]
 
     @jax.jit
