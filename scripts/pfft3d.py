@@ -35,7 +35,7 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
 
     # Remap to the global array from the local slice
     devices = mesh_utils.create_device_mesh(pdims)
-    mesh = Mesh(devices, axis_names=('z', 'y'))
+    mesh = Mesh(devices.T, axis_names=('z', 'y'))
     global_array = multihost_utils.host_local_array_to_global_array(
         array, mesh, P('z', 'y'))
 
@@ -54,30 +54,6 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
     @jax.jit
     def do_ifft(x):
         return jaxdecomp.fft.pifft3d(x)
-
-    # Wass debugging start
-    @jax.jit
-    def jax_fft(x):
-        arr = jax.numpy.fft.fft(x, axis=2)
-        arr = jax.numpy.fft.fft(arr, axis=1)
-        arr = jax.numpy.fft.fft(arr, axis=0)
-        arr = arr.transpose([1, 2, 0])
-        return arr
-
-    @jax.jit
-    def jax_ifft(x):
-        arr = jax.numpy.fft.ifft(x, axis=0)
-        arr = jax.numpy.fft.ifft(arr, axis=1)
-        arr = jax.numpy.fft.ifft(arr, axis=2)
-        arr = arr.transpose(2, 0, 1)
-        return arr
-
-    def print_array(arr):
-        print(arr.shape)
-        for z in range(arr.shape[0]):
-            for y in range(arr.shape[1]):
-                for x in range(arr.shape[2]):
-                    print(f"({z},{y},{x}) {arr[z][y][x]}")
 
     @jax.jit
     def get_diff(arr1, arr2):
@@ -118,8 +94,7 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
         # it is done on non fully addressable global arrays in needs the mesh and to be jitted
         diff = get_diff(global_array, rec_array)
 
-    if jax.process_index() == 0:
-        print(f"Maximum reconstruction diff {diff}")
+    print(jax.process_index(), 'ifft took', after - before, 's')
 
     with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
         f.write(

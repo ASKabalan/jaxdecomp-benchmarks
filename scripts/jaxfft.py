@@ -30,12 +30,28 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
     print(f"Local array shape: {array.shape}")
     # remap to global array
     devices = mesh_utils.create_device_mesh(pdims)
-    mesh = Mesh(devices, axis_names=('a', 'b'))
+    mesh = Mesh(devices.T, axis_names=('z', 'y'))
     global_array = multihost_utils.host_local_array_to_global_array(
-        array, mesh, P('b', 'a'))
+        array, mesh, P('z', 'y'))
+
+    # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
+    def jax_transposeXtoY(data):
+        return  lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2 , 0 , 1])
+
+    # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
+    def jax_transposeYtoZ(x):
+        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2 , 0 , 1])
+
+    # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
+    def jax_transposeZtoY(x):
+        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2 ,0])
+
+    # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
+    def jax_transposeYtoX(x):
+        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2 ,0])
 
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_specs=P('b', 'a'), out_specs=P('b', 'a'))
+    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('z', 'y'))
     def fft3d(mesh):
         """ Performs a 3D complex Fourier transform
 
@@ -47,13 +63,13 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
           are tranposed.
       """
         mesh = jnp.fft.fft(mesh)
-        mesh = lax.all_to_all(mesh, 'b', 0, 0, tiled=True)
+        mesh = jax_transposeXtoY(mesh)
         mesh = jnp.fft.fft(mesh)
-        mesh = lax.all_to_all(mesh, 'a', 0, 0, tiled=True)
+        mesh = jax_transposeYtoX(mesh)
         return jnp.fft.fft(mesh)  # Note the output is transposed # [z, x, y]
 
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_specs=P('b', 'a'), out_specs=P('b', 'a'))
+    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('z', 'y'))
     def ifft3d(mesh):
         """ Performs a 3D complex inverse Fourier transform
 
@@ -65,9 +81,9 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
           are tranposed.
       """
         mesh = jnp.fft.ifft(mesh)
-        mesh = lax.all_to_all(mesh, 'a', 0, 0, tiled=True)
+        mesh = jax_transposeZtoY(mesh)
         mesh = jnp.fft.ifft(mesh)
-        mesh = lax.all_to_all(mesh, 'b', 0, 0, tiled=True)
+        mesh = jax_transposeYtoX(mesh)
         return jnp.fft.ifft(mesh)
 
     if jax.process_index() == 0:
@@ -117,6 +133,26 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
         # make sure get_diff is called inside the mesh context
         # it is done on non fully addressable global arrays in needs the mesh and to be jitted
         diff = get_diff(global_array, rec_array)
+
+    # gathered_array = multihost_utils.process_allgather(global_array,tiled=True)
+    # k_gathered = jnp.fft.fftn(gathered_array).transpose([1 , 2 , 0])
+    # rec_array_gathered =jnp.fft.ifftn(k_gathered).transpose([2 , 0 , 1])
+
+    # jd_k_gathered = multihost_utils.process_allgather(karray,tiled=True)
+    # jd_rec_array_gathered = multihost_utils.process_allgather(rec_array,tiled=True)
+
+    # diff_gathered = jnp.abs(gathered_array - rec_array_gathered).max()
+    # diff_k_gathered = jnp.abs(jd_k_gathered.real- k_gathered.real).max()
+
+    # from itertools import permutations
+    # for perm in permutations([0, 1, 2]):
+    #     if jnp.all(jd_k_gathered == k_gathered.transpose(perm)):
+    #         print(f"gathered_jd_xy Permutation {perm} is good 🎉")
+    #     else:
+    #         print(f"gathered_jd_xy Permutation {perm} is bad")
+
+    # print(f"Diff between gathered and iffted array: {diff_gathered}")
+    # print(f"Diff between diff_k_gathered and jd_k_gathered array : {diff_k_gathered}")
 
     print(jax.process_index(), 'ifft took', after - before, 's')
 
