@@ -1,6 +1,8 @@
 import jax
 
 jax.distributed.initialize()
+from mpi4py import MPI
+
 rank = jax.process_index()
 size = jax.process_count()
 import jax.numpy as jnp
@@ -53,6 +55,8 @@ decomp = [(size, 1), (1, size), pencil_1, pencil_2]
 global_shapes = [(4, 8, 16), (4, 4, 4), (29 * size, 19 * size, 17 * size)
                  ]  # Cubes, non-cubes and primes
 
+decomp = [pencil_1]
+global_shapes = [(4, 4, 4)]
 
 
 
