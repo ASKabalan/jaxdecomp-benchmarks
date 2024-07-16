@@ -175,17 +175,17 @@ for pr in "${precisions[@]}"; do
 done
 
 
-out_dir="out_prof/$gpu_name/$nb_gpus"
+# out_dir="out_prof/$gpu_name/$nb_gpus"
 
-echo "Output dir is  : $out_dir"
+# echo "Output dir is  : $out_dir"
 
-for pr in "${precisions[@]}"; do
-    for g in "${grid[@]}"; do
-        for pd in $pdim; do
-            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-        done
-    done
-done
+# for pr in "${precisions[@]}"; do
+#     for g in "${grid[@]}"; do
+#         for pd in $pdim; do
+#             plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+#             plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+#             plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#             plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#         done
+#     done
+# done

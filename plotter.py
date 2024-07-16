@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 from matplotlib.patches import FancyBboxPatch
 
+np.seterr(divide='ignore')
 plt.rcParams.update({'font.size': 10})
 sns.plotting_context("paper")
 
@@ -416,7 +417,8 @@ if __name__ == "__main__":
                         help='Time aggregation method')
     parser.add_argument('-db',
                         '--dark_bg',
-                        action='store_true',
+                        type=bool,
+                        default=False,
                         help='Use dark background for plotting')
     parser.add_argument('-pd',
                         '--print_decompositions',
