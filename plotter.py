@@ -129,7 +129,7 @@ def plot_by_gpus(dataframes,
         ax.set_yticks(time_ticks)
 
         ax.set_xlabel('Number of GPUs')
-        ax.set_ylabel('Time')
+        ax.set_ylabel('Time (secondes)')
 
         for x_value in unique_gpus:
             ax.axvline(x=x_value, color='gray', linestyle='--', alpha=0.5)
@@ -274,7 +274,7 @@ def plot_by_data_size(dataframes,
         ax.set_yticks(time_ticks)
 
         ax.set_xlabel('Data size (pixels³)')
-        ax.set_ylabel('Time (ms)')
+        ax.set_ylabel('Time (secondes)')
 
         for x_value in data_sizes:
             ax.axvline(x=x_value, color='grey', linestyle=':', alpha=0.5)
