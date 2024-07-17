@@ -18,4 +18,3 @@ for precision in ${precisions[@]}; do
         python plotter.py -f out/a100/* -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -t $fft_type -d $sizes -db $dark_mode -o plots/data_a100_${fft_type}_${precision}.png -sc Weak
     done
 done
-

@@ -5,18 +5,16 @@ from mpi4py import MPI
 
 rank = jax.process_index()
 size = jax.process_count()
-import jax.numpy as jnp
-
-from jax.experimental import mesh_utils, multihost_utils
-from jax.sharding import Mesh, NamedSharding, PartitionSpec as P
 from functools import partial
-
-from jax.experimental.shard_map import shard_map
-from jax import lax
-
-import pytest
 from math import prod
 
+import jax.numpy as jnp
+import pytest
+from jax import lax
+from jax.experimental import mesh_utils, multihost_utils
+from jax.experimental.shard_map import shard_map
+from jax.sharding import Mesh, NamedSharding
+from jax.sharding import PartitionSpec as P
 from jaxdecomp import (transposeXtoY, transposeYtoX, transposeYtoZ,
                        transposeZtoY)
 from numpy.testing import assert_array_equal
@@ -59,7 +57,6 @@ decomp = [pencil_1]
 global_shapes = [(4, 4, 4)]
 
 
-
 # Cartesian product tests
 @pytest.mark.parametrize("pdims",
                          decomp)  # Test with Slab and Pencil decompositions
@@ -77,24 +74,22 @@ def test_tranpose(pdims, global_shape):
     @jax.jit
     @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeXtoY(data):
-        return lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2 , 0 , 1])
+        return lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2, 0, 1])
 
     @jax.jit
     @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeYtoZ(x):
-        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2 , 0 , 1])
+        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2, 0, 1])
 
     @jax.jit
     @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeZtoY(x):
-        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2 ,0])
+        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2, 0])
 
     @jax.jit
     @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeYtoX(x):
-        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2 ,0])
-
-
+        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2, 0])
 
     with mesh:
         print(f"Running JD")
@@ -109,7 +104,6 @@ def test_tranpose(pdims, global_shape):
         jax_tranposed_yz = jax_transposeYtoZ(jax_transposed_xy)
         jax_tranposed_zy = jax_transposeZtoY(jax_tranposed_yz)
         jax_tranposed_yx = jax_transposeYtoX(jax_tranposed_zy)
-
 
     gathered_array = multihost_utils.process_allgather(global_array,
                                                        tiled=True)
@@ -133,7 +127,6 @@ def test_tranpose(pdims, global_shape):
                                                         tiled=True)
 
     # is gathered_jax_xy == gathered_array with a transpose
-
 
     # Explanation :
     # Tranposing forward is a shift axis to the right so ZYX to XZY to YXZ (2 0 1)

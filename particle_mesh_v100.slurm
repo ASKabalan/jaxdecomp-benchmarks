@@ -1,23 +1,23 @@
 #!/bin/bash
-########################################## 
-## SELECT EITHER tkc@a100 OR tkc@v100 ## 
-########################################## 
+##########################################
+## SELECT EITHER tkc@a100 OR tkc@v100 ##
+##########################################
 #SBATCH --account tkc@v100
-########################################## 
+##########################################
 #SBATCH --job-name=Particle-Mesh   # nom du job
 # Il est possible d'utiliser une autre partition que celle par default
 # en activant l'une des 5 directives suivantes :
-########################################## 
-## SELECT EITHER a100  or v100-32g   ## 
-########################################## 
+##########################################
+## SELECT EITHER a100  or v100-32g   ##
+##########################################
 #SBATCH -C v100-32g
-########################################## 
+##########################################
 #******************************************
-########################################## 
+##########################################
 ## SELECT Number of nodes and GPUs per node
 ## For A100 ntasks-per-node and gres=gpu should be 8
 ## For V100 ntasks-per-node and gres=gpu should be 4
-########################################## 
+##########################################
 #SBATCH --nodes=2                    # nombre de noeud
 #SBATCH --ntasks-per-node=4          # nombre de tache MPI par noeud (= nombre de GPU par noeud)
 #SBATCH --gres=gpu:4                # nombre de GPU par nÅ“ud (max 8 avec gpu_p2, gpu_p5)
@@ -55,7 +55,7 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-module load nvidia-nsight-systems
+module load nvidia-nsight-compute/2023.3.1.0
 
 echo "The number of nodes allocated for this job is: $num_nodes"
 echo "The number of GPUs allocated for this job is: $nb_gpus"
@@ -72,14 +72,14 @@ function profile_python() {
 
     local script_name=$(basename "$1" .py)
     local output_dir="prof_traces/$script_name"
-    local report_dir="out_prof/$script_name"
+    local report_dir="out_prof/$gpu_name/$nb_gpus/$script_name"
 
     if [ $OUTPUT_FOLDER_ARGS -eq 1 ]; then
         local args=$(echo "${@:2}" | tr ' ' '_')
         # Remove characters '/' and '-' from folder name
         args=$(echo "$args" | tr -d '/-')
         output_dir="prof_traces/$script_name/$args"
-        report_dir="out_prof/$script_name/$args"
+        report_dir="out_prof/$gpu_name/$nb_gpus/$script_name/$args"
     fi
 
     mkdir -p "$output_dir"
@@ -113,7 +113,10 @@ function run_python() {
 # run or profile
 
 function slaunch() {
-    #run_python "$@"
+    run_python "$@"
+}
+
+function plaunch() {
     profile_python "$@"
 }
 
@@ -136,15 +139,15 @@ declare -A pdims_table
 # Define the table
 pdims_table[4]="2x2 1x4 4x1"
 pdims_table[8]="2x4 1x8 8x1 4x2"
-pdims_table[16]="4x4 2x8 8x2 1x16 16x1"
-pdims_table[32]="4x8 8x4 2x16 16x2 1x32 32x1" 
-pdims_table[64]="8x8 4x16 16x4 1x64 64x1 2x32 32x2"
+pdims_table[16]="4x4 1x16 16x1"
+pdims_table[32]="4x8 8x4 1x32 32x1"
+pdims_table[64]="8x8 16x4 1x64 64x1"
 pdims_table[128]="8x16 16x8 4x32 32x4 1x128 128x1 2x64 64x2"
 pdims_table[160]="8x20 20x8 16x10 10x16 5x32 32x5 1x160 160x1 2x80 80x2 4x40 40x4"
 
 
 # mpch=(128 256 512 1024 2048 4096)
-grid=(16 32 64 128 256 512  1024 2048 4096)
+grid=(1024 2048 4096)
 precisions=(float32 float64)
 pdim="${pdims_table[$nb_gpus]}"
 echo "pdims: $pdim"
@@ -166,22 +169,38 @@ else
     gpu_name="v100"
 fi
 
-out_dir="out_bench/$gpu_name/$nb_gpus"
-# out_dir="out_prof/$gpu_name/$nb_gpus"
+# out_dir="out_bench/$gpu_name/$nb_gpus"
+out_dir="out_prof/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
 for pr in "${precisions[@]}"; do
     for g in "${grid[@]}"; do
         for pd in $pdim; do
-            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mpi4jax.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            plaunch scripts/mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
         done
     done
 done
 
+# out_dir="out_bench/$gpu_name/$nb_gpus"
+out_dir="out_mem/$gpu_name/$nb_gpus"
 
+echo "Output dir is  : $out_dir"
 
-
+for pr in "${precisions[@]}"; do
+    for g in "${grid[@]}"; do
+        for pd in $pdim; do
+            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mem_jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mem_mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+        done
+    done
+done

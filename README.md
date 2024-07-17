@@ -29,7 +29,7 @@ Use script `plot_all.sh` to plot all the data
 
 - `-ta` : time aggregation : min, max, mean : how to aggregate the time accross the ranks
 
-since there is a `block_until_ready` in the code, the min is the most relevant 
+since there is a `block_until_ready` in the code, the min is the most relevant
 
 - `-sc` : Strong or Weak scaling
 
@@ -37,4 +37,3 @@ since there is a `block_until_ready` in the code, the min is the most relevant
 # Running slurms
 
 Slurms are made for Jean-Zay, you can use them as a template for your own cluster
-

@@ -12,13 +12,21 @@ import jax.numpy as jnp
 from cupy.cuda.nvtx import RangePop, RangePush
 from jax import lax
 from jax.experimental import mesh_utils, multihost_utils
-from jax.experimental.pjit import pjit
+from jax.experimental.multihost_utils import sync_global_devices
 from jax.experimental.shard_map import shard_map
 from jax.sharding import Mesh, NamedSharding
 from jax.sharding import PartitionSpec as P
 
 
-def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
+def chrono_fun(fun, *args):
+    start = time.perf_counter()
+    out = fun(*args).block_until_ready()
+    end = time.perf_counter()
+    return out, end - start
+
+
+def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
+                  output_path):
 
     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[
@@ -36,19 +44,19 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
 
     # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeXtoY(data):
-        return  lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2 , 0 , 1])
+        return lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2, 0, 1])
 
     # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeYtoZ(x):
-        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2 , 0 , 1])
+        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2, 0, 1])
 
     # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
     def jax_transposeZtoY(x):
-        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2 ,0])
+        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2, 0])
 
     # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
     def jax_transposeYtoX(x):
-        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2 ,0])
+        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2, 0])
 
     @jax.jit
     @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('z', 'y'))
@@ -101,68 +109,39 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, output_path):
     def get_diff(arr1, arr2):
         return jnp.abs(arr1 - arr2).max()
 
+    jit_fft_time = 0
+    jit_ifft_time = 0
+    jit_ffts_times = []
+    jit_iffts_times = []
     with mesh:
-        # warm start and get hlo
-        RangePush("Warmup")
-        do_fft(global_array).block_until_ready()
+        # Warm start
+        RangePush("warmup")
+        global_array, jit_fft_time = chrono_fun(do_fft, global_array)
+        global_array, jit_ifft_time = chrono_fun(do_ifft, global_array)
         RangePop()
+        sync_global_devices("warmup")
+        for i in range(iterations):
+            RangePush(f"fft iter {i}")
+            global_array, fft_time = chrono_fun(do_fft, global_array)
+            RangePop()
+            jit_ffts_times.append(fft_time)
+            RangePush(f"ifft iter {i}")
+            global_array, ifft_time = chrono_fun(do_ifft, global_array)
+            RangePop()
+            jit_iffts_times.append(ifft_time)
 
-        before = time.perf_counter()
-        RangePush("Actual FFT Call")
-        karray = do_fft(global_array).block_until_ready()
-        RangePop()
-        after = time.perf_counter()
-
-    print(jax.process_index(), 'fft took', after - before, 's')
+    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
     with open(f"{output_path}/jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
+                {min(jit_ffts_times)},{max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
         )
-
-    # And now, let's do the inverse FFT
-    with mesh:
-        RangePush("IFFT Warmup")
-        rec_array = do_ifft(karray).block_until_ready()
-        RangePop()
-
-        before = time.perf_counter()
-        RangePush("Actual IFFT Call")
-        rec_array = do_ifft(karray).block_until_ready()
-        RangePop()
-        after = time.perf_counter()
-        # make sure get_diff is called inside the mesh context
-        # it is done on non fully addressable global arrays in needs the mesh and to be jitted
-        diff = get_diff(global_array, rec_array)
-
-    # gathered_array = multihost_utils.process_allgather(global_array,tiled=True)
-    # k_gathered = jnp.fft.fftn(gathered_array).transpose([1 , 2 , 0])
-    # rec_array_gathered =jnp.fft.ifftn(k_gathered).transpose([2 , 0 , 1])
-
-    # jd_k_gathered = multihost_utils.process_allgather(karray,tiled=True)
-    # jd_rec_array_gathered = multihost_utils.process_allgather(rec_array,tiled=True)
-
-    # diff_gathered = jnp.abs(gathered_array - rec_array_gathered).max()
-    # diff_k_gathered = jnp.abs(jd_k_gathered.real- k_gathered.real).max()
-
-    # from itertools import permutations
-    # for perm in permutations([0, 1, 2]):
-    #     if jnp.all(jd_k_gathered == k_gathered.transpose(perm)):
-    #         print(f"gathered_jd_xy Permutation {perm} is good 🎉")
-    #     else:
-    #         print(f"gathered_jd_xy Permutation {perm} is bad")
-
-    # print(f"Diff between gathered and iffted array: {diff_gathered}")
-    # print(f"Diff between diff_k_gathered and jd_k_gathered array : {diff_k_gathered}")
-
-    print(jax.process_index(), 'ifft took', after - before, 's')
-
-    with open(f"{output_path}/jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
+                {min(jit_iffts_times)},{max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
         )
 
-    if jax.process_index() == 0:
-        print(f"Maximum reconstruction diff {diff}")
+    print(f"Done")
 
 
 if __name__ == "__main__":

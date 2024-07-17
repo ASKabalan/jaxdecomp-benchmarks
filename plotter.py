@@ -33,7 +33,6 @@ def plot_by_gpus(dataframes,
         if not df[df['x'].isin(fixed_data_size)].empty:
             continue
 
-
     num_subplots = len(fixed_data_size)
     num_rows = int(np.ceil(np.sqrt(num_subplots)))
     num_cols = int(np.ceil(num_subplots / num_rows))

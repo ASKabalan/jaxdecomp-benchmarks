@@ -12,20 +12,33 @@ import jax.numpy as jnp
 import jaxdecomp
 from cupy.cuda.nvtx import RangePop, RangePush
 from jax.experimental import mesh_utils, multihost_utils
+from jax.experimental.multihost_utils import sync_global_devices
 from jax.sharding import Mesh
 from jax.sharding import PartitionSpec as P
 
 
+def chrono_fun(fun, *args):
+    start = time.perf_counter()
+    out = fun(*args).block_until_ready()
+    end = time.perf_counter()
+    return out, end - start
+
+
 def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
-                  output_path):
+                  iterations, output_path):
 
     if backend == "NCCL":
         jaxdecomp.config.update('transpose_comm_backend',
                                 jaxdecomp.TRANSPOSE_COMM_NCCL)
+    elif backend == "NCCL_PL":
+        jaxdecomp.config.update('transpose_comm_backend',
+                                jaxdecomp.TRANSPOSE_COMM_NCCL_PL)
+    elif backend == "MPI_P2P":
+        jaxdecomp.config.update('transpose_comm_backend',
+                                jaxdecomp.TRANSPOSE_COMM_MPI_P2P)
     elif backend == "MPI":
         jaxdecomp.config.update('transpose_comm_backend',
                                 jaxdecomp.TRANSPOSE_COMM_MPI_A2A)
-
     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[
         global_shape[0] // pdims[0], global_shape[1] // pdims[1],
@@ -59,47 +72,39 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
     def get_diff(arr1, arr2):
         return jnp.abs(arr1 - arr2).max()
 
+    jit_fft_time = 0
+    jit_ifft_time = 0
+    jit_ffts_times = []
+    jit_iffts_times = []
     with mesh:
         # Warm start
-        RangePush("Warmup")
-        do_fft(global_array).block_until_ready()
+        RangePush("warmup")
+        global_array, jit_fft_time = chrono_fun(do_fft, global_array)
+        global_array, jit_ifft_time = chrono_fun(do_ifft, global_array)
         RangePop()
+        sync_global_devices("warmup")
+        for i in range(iterations):
+            RangePush(f"fft iter {i}")
+            global_array, fft_time = chrono_fun(do_fft, global_array)
+            RangePop()
+            jit_ffts_times.append(fft_time)
+            RangePush(f"ifft iter {i}")
+            global_array, ifft_time = chrono_fun(do_ifft, global_array)
+            RangePop()
+            jit_iffts_times.append(ifft_time)
 
-        before = time.perf_counter()
-        RangePush("Actual FFT Call")
-        karray = do_fft(global_array).block_until_ready()
-        RangePop()
-        after = time.perf_counter()
-
-    print(rank, 'took', after - before, 's')
+    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
     with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
+                {min(jit_ffts_times)},{max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
         )
-
-    # And now, let's do the inverse FFT
-
-    with mesh:
-        RangePush("IFFT Warmup")
-        rec_array = do_ifft(karray).block_until_ready()
-        RangePop()
-
-        before = time.perf_counter()
-        RangePush("Actual IFFT Call")
-        rec_array = do_ifft(karray).block_until_ready()
-        RangePop()
-        after = time.perf_counter()
-
-        # make sure get_diff is called inside the mesh context
-        # it is done on non fully addressable global arrays in needs the mesh and to be jitted
-        diff = get_diff(global_array, rec_array)
-
-    print(jax.process_index(), 'ifft took', after - before, 's')
-
-    with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{after - before}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
+                {min(jit_iffts_times)},{max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
         )
+
+    print(f"Done")
 
 
 if __name__ == "__main__":
@@ -124,6 +129,7 @@ if __name__ == "__main__":
                         '--backend',
                         type=str,
                         help='Backend to use for transpose comm',
+                        choices=["NCCL", "NCCL_PL", "MPI_P2P", "MPI"],
                         default="NCCL")
     parser.add_argument('-n',
                         '--nb_nodes',
@@ -140,6 +146,11 @@ if __name__ == "__main__":
                         type=str,
                         help='Precision',
                         default="float32")
+    parser.add_argument('-i',
+                        '--iterations',
+                        type=int,
+                        help='Number of iterations',
+                        default=10)
 
     args = parser.parse_args()
 
@@ -188,7 +199,7 @@ if __name__ == "__main__":
                 # raise ValueError(f"Global shape {global_shape} is not divisible by pdims {pdims}")
 
     run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision,
-                  output_path)
+                  args.iterations, output_path)
 
 jaxdecomp.finalize()
 jax.distributed.shutdown()

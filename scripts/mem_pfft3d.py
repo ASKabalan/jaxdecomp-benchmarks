@@ -4,26 +4,27 @@ jax.distributed.initialize()
 rank = jax.process_index()
 size = jax.process_count()
 import argparse
-import re
-import time
-from functools import partial
 
-import jax.numpy as jnp
+import jax.profiler
 import jaxdecomp
-from cupy.cuda.nvtx import RangePop, RangePush
 from jax.experimental import mesh_utils, multihost_utils
+from jax.experimental.multihost_utils import sync_global_devices
 from jax.sharding import Mesh
 from jax.sharding import PartitionSpec as P
 
-import jax.profiler
 
-
-def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,iterations,
-                  output_path ):
+def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
+                  iterations, output_path):
 
     if backend == "NCCL":
         jaxdecomp.config.update('transpose_comm_backend',
                                 jaxdecomp.TRANSPOSE_COMM_NCCL)
+    elif backend == "NCCL_PL":
+        jaxdecomp.config.update('transpose_comm_backend',
+                                jaxdecomp.TRANSPOSE_COMM_NCCL_PL)
+    elif backend == "MPI_P2P":
+        jaxdecomp.config.update('transpose_comm_backend',
+                                jaxdecomp.TRANSPOSE_COMM_MPI_P2P)
     elif backend == "MPI":
         jaxdecomp.config.update('transpose_comm_backend',
                                 jaxdecomp.TRANSPOSE_COMM_MPI_A2A)
@@ -53,18 +54,24 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,iterations,
     def do_fft(x):
         return jaxdecomp.fft.pfft3d(x)
 
+    @jax.jit
+    def do_ifft(x):
+        return jaxdecomp.fft.pifft3d(x)
+
     with mesh:
         # Warm start
-        do_fft(global_array).block_until_ready()
-        for _ in range(iterations):
+        global_array = do_fft(global_array).block_until_ready()
+        global_array = do_ifft(global_array).block_until_ready()
+        sync_global_devices("warmup")
+        for i in range(iterations):
             global_array = do_fft(global_array).block_until_ready()
+            global_array = do_ifft(global_array).block_until_ready()
 
-    
     out_path_params = f"{output_path}/{pdims[0]}x{pdims[1]}_{global_shape[0]}_{backend}_{nb_nodes}_{precision}"
     os.makedirs(out_path_params, exist_ok=True)
-    jax.profiler.save_device_memory_profile(f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
+    jax.profiler.save_device_memory_profile(
+        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
 
-    
 
 if __name__ == "__main__":
 
@@ -88,6 +95,7 @@ if __name__ == "__main__":
                         '--backend',
                         type=str,
                         help='Backend to use for transpose comm',
+                        choices=["NCCL", "NCCL_PL", "MPI_P2P", "MPI"],
                         default="NCCL")
     parser.add_argument('-n',
                         '--nb_nodes',
@@ -156,8 +164,8 @@ if __name__ == "__main__":
                 # Do not raise error for slurm jobs
                 # raise ValueError(f"Global shape {global_shape} is not divisible by pdims {pdims}")
 
-    run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision,args.iterations,
-                  output_path)
+    run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision,
+                  args.iterations, output_path)
 
 jaxdecomp.finalize()
 jax.distributed.shutdown()

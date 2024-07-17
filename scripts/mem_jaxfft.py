@@ -5,21 +5,19 @@ rank = jax.process_index()
 size = jax.process_count()
 import argparse
 import os
-import time
 from functools import partial
 
 import jax.numpy as jnp
-from cupy.cuda.nvtx import RangePop, RangePush
+import jax.profiler
 from jax import lax
 from jax.experimental import mesh_utils, multihost_utils
-from jax.experimental.pjit import pjit
+from jax.experimental.multihost_utils import sync_global_devices
 from jax.experimental.shard_map import shard_map
-from jax.sharding import Mesh, NamedSharding
 from jax.sharding import PartitionSpec as P
-import jax.profiler
 
 
-def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations , output_path):
+def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
+                  output_path):
 
     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[
@@ -98,17 +96,19 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations , output_
     def do_ifft(arr):
         return ifft3d(arr)
 
-
-
     with mesh:
         # Warm start
-        do_fft(global_array).block_until_ready()
-        for _ in range(iterations):
+        global_array = do_fft(global_array).block_until_ready()
+        global_array = do_ifft(global_array).block_until_ready()
+        sync_global_devices("warmup")
+        for i in range(iterations):
             global_array = do_fft(global_array).block_until_ready()
+            global_array = do_ifft(global_array).block_until_ready()
 
     out_path_params = f"{output_path}/{pdims[0]}x{pdims[1]}_{global_shape[0]}_{backend}_{nb_nodes}_{precision}"
     os.makedirs(out_path_params, exist_ok=True)
-    jax.profiler.save_device_memory_profile(f"{out_path_params}/jaxfft{rank}.prof")
+    jax.profiler.save_device_memory_profile(
+        f"{out_path_params}/jaxfft{rank}.prof")
 
 
 if __name__ == "__main__":
@@ -182,6 +182,7 @@ if __name__ == "__main__":
         parser.print_help()
         exit(0)
 
-    run_benchmark(pdims, global_shape, nb_nodes, args.precision, args.iterations,output_path)
+    run_benchmark(pdims, global_shape, nb_nodes, args.precision,
+                  args.iterations, output_path)
 
 jax.distributed.shutdown()

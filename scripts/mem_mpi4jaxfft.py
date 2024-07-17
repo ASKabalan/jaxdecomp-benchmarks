@@ -7,7 +7,6 @@ import time
 
 import jax.numpy as jnp
 import mpi4jax
-from cupy.cuda.nvtx import RangePop, RangePush
 from mpi4py import MPI
 
 # Create communicators
@@ -17,13 +16,6 @@ size = world.Get_size()
 
 if rank == 0:
     print("Communication setup done!")
-
-
-def chrono_fun(fun, *args):
-    start = time.perf_counter()
-    out = fun(*args).block_until_ready()
-    end = time.perf_counter()
-    return out, end - start
 
 
 def fft3d(arr, comms=None):
@@ -157,38 +149,18 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
     def do_ifft(x):
         return ifft3d(x, comms=comms)
 
-    jit_fft_time = 0
-    jit_ifft_time = 0
-    jit_ffts_times = []
-    jit_iffts_times = []
     # Warm start
-    RangePush("warmup")
-    global_array, jit_fft_time = chrono_fun(do_fft, global_array)
-    global_array, jit_ifft_time = chrono_fun(do_ifft, global_array)
-    RangePop()
-    MPI.COMM_WORLD.Barrier()
+    global_array = do_fft(global_array).block_until_ready()
+    global_array = do_ifft(global_array).block_until_ready()
+    world.barrier()
     for i in range(iterations):
-        RangePush(f"fft iter {i}")
-        global_array, fft_time = chrono_fun(do_fft, global_array)
-        RangePop()
-        jit_ffts_times.append(fft_time)
-        RangePush(f"ifft iter {i}")
-        global_array, ifft_time = chrono_fun(do_ifft, global_array)
-        RangePop()
-        jit_iffts_times.append(ifft_time)
+        global_array = do_fft(global_array).block_until_ready()
+        global_array = do_ifft(global_array).block_until_ready()
 
-    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
-    with open(f"{output_path}/mpi4jaxfft.csv", 'a') as f:
-        f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {min(jit_ffts_times)},{max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
-        )
-        f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {min(jit_iffts_times)},{max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
-        )
-
-    print(f"Done")
+    out_path_params = f"{output_path}/{pdims[0]}x{pdims[1]}_{global_shape[0]}_{backend}_{nb_nodes}_{precision}"
+    os.makedirs(out_path_params, exist_ok=True)
+    jax.profiler.save_device_memory_profile(
+        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
 
 
 if __name__ == "__main__":
@@ -226,7 +198,7 @@ if __name__ == "__main__":
     parser.add_argument('-i',
                         '--iterations',
                         type=int,
-                        help='Number of iterations',
+                        help='Iterations',
                         default=10)
 
     args = parser.parse_args()
