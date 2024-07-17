@@ -1,5 +1,6 @@
 import os
 import argparse
+import pandas as pd
 
 def concatenate_csvs(root_dir, output_dir):
     # Define the GPU types
@@ -15,6 +16,7 @@ def concatenate_csvs(root_dir, output_dir):
         # Check if the GPU directory exists
         if not os.path.exists(gpu_dir):
             continue
+        
         for csv_file_name in csv_files_names:
             # List CSV in directory and subdirectories
             csv_files = []
@@ -24,26 +26,37 @@ def concatenate_csvs(root_dir, output_dir):
                         csv_files.append(os.path.join(root, file))
 
             # Concatenate CSV files
-            all_lines = []
+            combined_df = pd.DataFrame()
             for csv_file in csv_files:
                 print(f'Concatenating {csv_file}...')
-                with open(csv_file, 'r') as f:
-                    lines = f.readlines()
-                    lines = [line for line in lines if line.strip()]
-                    if len(lines) == 0:
-                        continue
-                    all_lines.extend(lines)
+                df = pd.read_csv(csv_file,
+                                 header=None,
+                                 names=[
+                                     "rank", "FFT_type", "precision", "x", "y", "z",
+                                     "px", "py", "backend", "nodes", "time"
+                                 ],
+                                 index_col=False)
+                combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-            if not os.path.exists(os.path.join(output_dir,gpu)):
-                print(f"Creating directory {os.path.join(output_dir,gpu)}")
-                os.makedirs(os.path.join(output_dir,gpu))
-            output_file = os.path.join(output_dir,gpu, os.path.basename(csv_file))
+            # Remove duplicates based on specified columns
+            combined_df.drop_duplicates(
+                subset=[
+                    "rank", "FFT_type", "precision", "x", "y", "z", "px", "py",
+                    "backend", "nodes"
+                ],
+                keep='last',
+                inplace=True
+            )
 
-            with open(output_file, 'a+') as f:
-                f.write(''.join(all_lines))
+            if not os.path.exists(os.path.join(output_dir, gpu)):
+                print(f"Creating directory {os.path.join(output_dir, gpu)}")
+                os.makedirs(os.path.join(output_dir, gpu))
+
+            output_file = os.path.join(output_dir, gpu, csv_file_name)
+            combined_df.to_csv(output_file, index=False)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Concatenate CSV files by GPU type.')
+    parser = argparse.ArgumentParser(description='Concatenate CSV files and remove duplicates by GPU type.')
     parser.add_argument('-i', '--input', dest='root_dir', type=str, help='Root directory containing CSV files.', required=True)
     parser.add_argument('-o', '--output', dest='output_dir', type=str, help='Output directory to save concatenated CSV files.', required=True)
     

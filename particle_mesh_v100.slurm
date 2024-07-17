@@ -62,6 +62,7 @@ echo "The number of GPUs allocated for this job is: $nb_gpus"
 
 export EQX_ON_ERROR=nan
 export CUDA_ALLOC=1
+export ENABLE_PERFO_STEP=NVTX
 
 function profile_python() {
     if [ $# -lt 1 ]; then
