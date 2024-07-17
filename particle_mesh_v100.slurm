@@ -30,7 +30,7 @@
 ##########################################
 # /!\ Attention, "multithread" fait reference a l'hyperthreading dans la terminologie Slurm
 #SBATCH --hint=nomultithread         # hyperthreading desactive
-#SBATCH --time=02:00:00              # temps d'execution maximum demande (HH:MM:SS)
+#SBATCH --time=04:00:00              # temps d'execution maximum demande (HH:MM:SS)
 #SBATCH --output=2n-big_boy.out # nom du fichier de sortie
 #SBATCH --error=2n-big_boy.out  # nom du fichier d'erreur (ici commun avec la sortie)
 #SBATCH --exclusive                  # ressources dediees
