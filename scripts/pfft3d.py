@@ -10,6 +10,7 @@ from functools import partial
 
 import jax.numpy as jnp
 import jaxdecomp
+import numpy as np
 from cupy.cuda.nvtx import RangePop, RangePush
 from jax.experimental import mesh_utils, multihost_utils
 from jax.experimental.multihost_utils import sync_global_devices
@@ -93,15 +94,17 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
             RangePop()
             jit_iffts_times.append(ifft_time)
 
+    jit_ffts_times = np.array(jit_ffts_times)
+    jit_iffts_times = np.array(jit_iffts_times)
     # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
     with open(f"{output_path}/jaxdecompfft.csv", 'a') as f:
         f.write(
             f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {min(jit_ffts_times)},{max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
+                {np.min(jit_ffts_times)},{np.max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
         )
         f.write(
             f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {min(jit_iffts_times)},{max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
+                {np.min(jit_iffts_times)},{np.max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
         )
 
     print(f"Done")
