@@ -69,17 +69,22 @@ function profile_python() {
         return 1
     fi
 
-    local script_name=$(basename "$2" .py)
-    local output_dir="traces/$script_name"
+    local script_name=$(basename "$1" .py)
+    local output_dir="prof_traces/$script_name"
+    local report_dir="out_prof/$script_name"
 
     if [ $OUTPUT_FOLDER_ARGS -eq 1 ]; then
-        local args=$(echo "${@:3}" | tr ' ' '_')
-        output_dir="traces/$script_name/$args"
+        local args=$(echo "${@:2}" | tr ' ' '_')
+        # Remove characters '/' and '-' from folder name
+        args=$(echo "$args" | tr -d '/-')
+        output_dir="prof_traces/$script_name/$args"
+        report_dir="out_prof/$script_name/$args"
     fi
 
     mkdir -p "$output_dir"
+    mkdir -p "$report_dir"
 
-    srun nsys profile -t cuda,nvtx,osrt,mpi -o "$output_dir/report_rank%q{SLURM_PROCID}" python "$@" > "$output_dir/$script_name.out" 2> "$output_dir/$script_name.err" || true
+    srun nsys profile -t cuda,nvtx,osrt,mpi -o "$report_dir/report_rank%q{SLURM_PROCID}" python "$@" > "$output_dir/$script_name.out" 2> "$output_dir/$script_name.err" || true
 }
 
 function run_python() {
@@ -104,13 +109,14 @@ function run_python() {
 }
 
 
-function slaunch() {
-    run_python "$@"
-}
+# run or profile
 
-function plaunch() {
+function slaunch() {
+    #run_python "$@"
     profile_python "$@"
 }
+
+
 
 
 # Echo des commandes lancees
@@ -127,10 +133,10 @@ ln -s $JOBSCRATCH /tmp/nvidia
 
 declare -A pdims_table
 # Define the table
-pdims_table[4]="2x2"
+pdims_table[4]="2x2 1x4 4x1"
 pdims_table[8]="2x4 1x8 8x1 4x2"
-pdims_table[16]="4x4 2x8 8x2"
-pdims_table[32]="4x8 8x4 2x16 16x2"
+pdims_table[16]="4x4 2x8 8x2 1x16 16x1"
+pdims_table[32]="4x8 8x4 2x16 16x2 1x32 32x1" 
 pdims_table[64]="8x8 4x16 16x4 1x64 64x1 2x32 32x2"
 pdims_table[128]="8x16 16x8 4x32 32x4 1x128 128x1 2x64 64x2"
 pdims_table[160]="8x20 20x8 16x10 10x16 5x32 32x5 1x160 160x1 2x80 80x2 4x40 40x4"
@@ -160,6 +166,7 @@ else
 fi
 
 out_dir="out_bench/$gpu_name/$nb_gpus"
+# out_dir="out_prof/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
@@ -169,23 +176,11 @@ for pr in "${precisions[@]}"; do
             slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
             slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
             slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mpi4jax.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
         done
     done
 done
 
 
-# out_dir="out_prof/$gpu_name/$nb_gpus"
 
-# echo "Output dir is  : $out_dir"
 
-# for pr in "${precisions[@]}"; do
-#     for g in "${grid[@]}"; do
-#         for pd in $pdim; do
-#             plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-#         done
-#     done
-# done

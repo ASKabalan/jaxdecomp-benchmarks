@@ -69,17 +69,22 @@ function profile_python() {
         return 1
     fi
 
-    local script_name=$(basename "$2" .py)
-    local output_dir="traces/$script_name"
+    local script_name=$(basename "$1" .py)
+    local output_dir="prof_traces/$script_name"
+    local report_dir="out_prof/$script_name"
 
     if [ $OUTPUT_FOLDER_ARGS -eq 1 ]; then
-        local args=$(echo "${@:3}" | tr ' ' '_')
-        output_dir="traces/$script_name/$args"
+        local args=$(echo "${@:2}" | tr ' ' '_')
+        # Remove characters '/' and '-' from folder name
+        args=$(echo "$args" | tr -d '/-')
+        output_dir="prof_traces/$script_name/$args"
+        report_dir="out_prof/$script_name/$args"
     fi
 
     mkdir -p "$output_dir"
+    mkdir -p "$report_dir"
 
-    srun nsys profile -t cuda,nvtx,osrt,mpi -o "$output_dir/report_rank%q{SLURM_PROCID}" python "$@" > "$output_dir/$script_name.out" 2> "$output_dir/$script_name.err" || true
+    srun nsys profile -t cuda,nvtx,osrt,mpi -o "$report_dir/report_rank%q{SLURM_PROCID}" python "$@" > "$output_dir/$script_name.out" 2> "$output_dir/$script_name.err" || true
 }
 
 function run_python() {
@@ -104,13 +109,14 @@ function run_python() {
 }
 
 
-function slaunch() {
-    run_python "$@"
-}
+# run or profile
 
-function plaunch() {
+function slaunch() {
+    #run_python "$@"
     profile_python "$@"
 }
+
+
 
 
 # Echo des commandes lancees
@@ -160,6 +166,7 @@ else
 fi
 
 out_dir="out_bench/$gpu_name/$nb_gpus"
+# out_dir="out_prof/$gpu_name/$nb_gpus"
 
 echo "Output dir is  : $out_dir"
 
@@ -175,17 +182,5 @@ for pr in "${precisions[@]}"; do
 done
 
 
-# out_dir="out_prof/$gpu_name/$nb_gpus"
 
-# echo "Output dir is  : $out_dir"
 
-# for pr in "${precisions[@]}"; do
-#     for g in "${grid[@]}"; do
-#         for pd in $pdim; do
-#             plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-#             plaunch scripts/mpi4jax.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-#         done
-#     done
-# done
