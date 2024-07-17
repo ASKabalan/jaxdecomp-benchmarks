@@ -21,13 +21,15 @@ def concatenate_csvs(root_dir, output_dir):
             # List CSV in directory and subdirectories
             csv_files = []
             for root, dirs, files in os.walk(gpu_dir):
+                print(f"Searching for {csv_file_name} in {root}...")
                 for file in files:
                     if file.endswith(csv_file_name):
                         csv_files.append(os.path.join(root, file))
 
             # Concatenate CSV files
             combined_df = pd.DataFrame()
-            for csv_file in csv_files:
+
+            for csv_file in sorted(csv_files):
                 print(f'Concatenating {csv_file}...')
                 df = pd.read_csv(csv_file,
                                  header=None,
