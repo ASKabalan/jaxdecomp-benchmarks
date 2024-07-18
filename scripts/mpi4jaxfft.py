@@ -178,28 +178,41 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
         RangePop()
         iffts_times.append(ifft_time)
 
-    ffts_times = np.array(ffts_times)
-    iffts_times = np.array(iffts_times)
+    ffts_times = np.array(ffts_times) * 1e3
+    iffts_times = np.array(iffts_times) * 1e3
     # FFT
+    jit_fft_time *= 1e3
     fft_min_time = np.min(ffts_times)
-    fft_max_time  = np.max(ffts_times)
+    fft_max_time = np.max(ffts_times)
     fft_mean_time = jnp.mean(ffts_times)
     fft_std_time = jnp.std(ffts_times)
+    last_fft_time = ffts_times[-1]
     # IFFT
+    jit_ifft_time *= 1e3
     ifft_min_time = np.min(iffts_times)
     ifft_max_time = np.max(iffts_times)
     ifft_mean_time = jnp.mean(iffts_times)
     ifft_std_time = jnp.std(iffts_times)
+    last_ifft_time = iffts_times[-1]
+
     # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES JIT_TIME MIN MAX MEAN STD
     with open(f"{output_path}/mpi4jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_fft_time},{fft_min_time},{fft_max_time},{fft_mean_time},{fft_std_time}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_fft_time:.4f},{fft_min_time:.4f},{fft_max_time:.4f},{fft_mean_time:.4f},{fft_std_time:.4f},{last_fft_time:.4f}\n"
         )
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_ifft_time},{ifft_min_time},{ifft_max_time},{ifft_mean_time},{ifft_std_time}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_ifft_time:.4f},{ifft_min_time:.4f},{ifft_max_time:.4f},{ifft_mean_time:.4f},{ifft_std_time:.4f},{last_ifft_time:.4f}\n"
         )
 
     print(f"Done")
+    print(f"FFT times")
+    print(f"JIT time {jit_fft_time:.4f} ms")
+    for i in range(iterations):
+        print(f"FFT {i} time {ffts_times[i]:.4f} ms")
+    print(f"IFFT times ")
+    print(f"JIT time {jit_ifft_time:.4f} ms")
+    for i in range(iterations):
+        print(f"IFFT {i} time {iffts_times[i]:.4f} ms")
 
 
 if __name__ == "__main__":

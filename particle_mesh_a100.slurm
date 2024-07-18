@@ -4,7 +4,7 @@
 ##########################################
 #SBATCH --account glc@a100
 ##########################################
-#SBATCH --job-name=ProfParticle-Mesh   # nom du job
+#SBATCH --job-name=1N-FFT-Mesh   # nom du job
 # Il est possible d'utiliser une autre partition que celle par default
 # en activant l'une des 5 directives suivantes :
 ##########################################
@@ -30,7 +30,7 @@
 ##########################################
 # /!\ Attention, "multithread" fait reference a l'hyperthreading dans la terminologie Slurm
 #SBATCH --hint=nomultithread         # hyperthreading desactive
-#SBATCH --time=00:01:00              # temps d'execution maximum demande (HH:MM:SS)
+#SBATCH --time=04:00:00              # temps d'execution maximum demande (HH:MM:SS)
 #SBATCH --output=%x_%N_a100.out # nom du fichier de sortie
 #SBATCH --error=%x_%N_a100.out  # nom du fichier d'erreur (ici commun avec la sortie)
 #SBATCH --qos=qos_gpu-dev
@@ -56,7 +56,7 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-module load nvidia-nsight-systems/2024.1.1.59 
+module load nvidia-nsight-systems/2024.1.1.59
 
 
 echo "The number of nodes allocated for this job is: $num_nodes"
@@ -179,12 +179,11 @@ echo "Output dir is  : $out_dir"
 for pr in "${precisions[@]}"; do
     for g in "${grid[@]}"; do
         for pd in $pdim; do
-            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            plaunch scripts/mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
         done
     done
 done

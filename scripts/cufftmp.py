@@ -1,22 +1,24 @@
+# -*- coding: utf-8 -*-
 import jax
 
 jax.distributed.initialize()
 rank = jax.process_index()
 size = jax.process_count()
 import argparse
-import os
 import time
 from functools import partial
 
+import jax
 import jax.numpy as jnp
 import numpy as np
+from cufftmp_jax import cufftmp
 from cupy.cuda.nvtx import RangePop, RangePush
-from jax import lax
+from fft_common import Dir, Dist
 from jax.experimental import mesh_utils, multihost_utils
 from jax.experimental.multihost_utils import sync_global_devices
-from jax.experimental.shard_map import shard_map
-from jax.sharding import Mesh, NamedSharding
+from jax.sharding import Mesh
 from jax.sharding import PartitionSpec as P
+from xfft import xfft
 
 
 def chrono_fun(fun, *args):
@@ -26,89 +28,37 @@ def chrono_fun(fun, *args):
     return out, end - start
 
 
-def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
-                  output_path):
 
-    # Initialize the local slice with the local slice shape
+def run_benchmark(pdims, global_shape, nb_nodes, precision,
+                  iterations, output_path):
+
+
+     # Initialize the local slice with the local slice shape
     array = jax.random.normal(shape=[
-        global_shape[0] // pdims[1], global_shape[1] // pdims[0],
+        global_shape[0] // pdims[0], global_shape[1] // pdims[1],
         global_shape[2]
     ],
-                              key=jax.random.PRNGKey(0)) + jax.process_index()
-    backend = "NCCL"
-    print(f"Local array shape: {array.shape}")
-    # remap to global array
+                              key=jax.random.PRNGKey(rank))
+
+    if pdims[0] == 1:
+        dist = Dist.SLABS_X
+    elif pdims[1] == 1:
+        dist = Dist.SLABS_Y
+
+    dtype = jnp.complex64 if precision == "float32" else jnp.complex128
+
+    # Remap to the global array from the local slice
     devices = mesh_utils.create_device_mesh(pdims)
     mesh = Mesh(devices.T, axis_names=('z', 'y'))
     global_array = multihost_utils.host_local_array_to_global_array(
         array, mesh, P('z', 'y'))
 
-    # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
-    def jax_transposeXtoY(data):
-        return lax.all_to_all(data, 'y', 2, 1, tiled=True).transpose([2, 0, 1])
-
-    # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
-    def jax_transposeYtoZ(x):
-        return lax.all_to_all(x, 'z', 2, 1, tiled=True).transpose([2, 0, 1])
-
-    # @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('y', 'z'))
-    def jax_transposeZtoY(x):
-        return lax.all_to_all(x, 'z', 2, 0, tiled=True).transpose([1, 2, 0])
-
-    # @partial(shard_map, mesh=mesh, in_specs=P('y', 'z'), out_specs=P('z', 'y'))
-    def jax_transposeYtoX(x):
-        return lax.all_to_all(x, 'y', 2, 0, tiled=True).transpose([1, 2, 0])
-
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('z', 'y'))
-    def fft3d(mesh):
-        """ Performs a 3D complex Fourier transform
-
-      Args:
-          mesh: a real 3D tensor of shape [Nx, Ny, Nz]
-
-      Returns:
-          3D FFT of the input, note that the dimensions of the output
-          are tranposed.
-      """
-        mesh = jnp.fft.fft(mesh)
-        mesh = jax_transposeXtoY(mesh)
-        mesh = jnp.fft.fft(mesh)
-        mesh = jax_transposeYtoZ(mesh)
-        return jnp.fft.fft(mesh)  # Note the output is transposed # [z, x, y]
-
+    def do_fft(x):
+        return cufftmp(x, dist, Dir.FWD)
     @jax.jit
-    @partial(shard_map, mesh=mesh, in_specs=P('z', 'y'), out_specs=P('z', 'y'))
-    def ifft3d(mesh):
-        """ Performs a 3D complex inverse Fourier transform
-
-      Args:
-          mesh: a complex 3D tensor of shape [Nx, Ny, Nz]
-
-      Returns:
-          3D inverse FFT of the input, note that the dimensions of the output
-          are tranposed.
-      """
-        mesh = jnp.fft.ifft(mesh)
-        mesh = jax_transposeZtoY(mesh)
-        mesh = jnp.fft.ifft(mesh)
-        mesh = jax_transposeYtoX(mesh)
-        return jnp.fft.ifft(mesh)
-
-    if jax.process_index() == 0:
-        print(f"Global array shape: {global_array.shape}")
-
-    @jax.jit
-    def do_fft(arr):
-        return fft3d(arr)
-
-    @jax.jit
-    def do_ifft(arr):
-        return ifft3d(arr)
-
-    @jax.jit
-    def get_diff(arr1, arr2):
-        return jnp.abs(arr1 - arr2).max()
+    def do_ifft(x):
+        return cufftmp(x, dist.opposite, Dir.FWD)
 
     jit_fft_time = 0
     jit_ifft_time = 0
@@ -136,7 +86,7 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
     # FFT
     jit_fft_time *= 1e3
     fft_min_time = np.min(ffts_times)
-    fft_max_time = np.max(ffts_times)
+    fft_max_time  = np.max(ffts_times)
     fft_mean_time = jnp.mean(ffts_times)
     fft_std_time = jnp.std(ffts_times)
     last_fft_time = ffts_times[-1]
@@ -148,12 +98,12 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
     ifft_std_time = jnp.std(iffts_times)
     last_ifft_time = iffts_times[-1]
     # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES JIT_TIME MIN MAX MEAN STD
-    with open(f"{output_path}/jaxfft.csv", 'a') as f:
+    with open(f"{output_path}/cufftmp.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_fft_time:.4f},{fft_min_time:.4f},{fft_max_time:.4f},{fft_mean_time:.4f},{fft_std_time:.4f},{last_fft_time:.4f}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{"CUFFTMP"},{nb_nodes},{jit_fft_time:.4f},{fft_min_time:.4f},{fft_max_time:.4f},{fft_mean_time:.4f},{fft_std_time:.4f},{last_fft_time:.4f}\n"
         )
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_ifft_time:.4f},{ifft_min_time:.4f},{ifft_max_time:.4f},{ifft_mean_time:.4f},{ifft_std_time:.4f},{last_ifft_time:.4f}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{"CUFFTMP"},{nb_nodes},{jit_ifft_time:.4f},{ifft_min_time:.4f},{ifft_max_time:.4f},{ifft_mean_time:.4f},{ifft_std_time:.4f},{last_ifft_time:.4f}\n"
         )
 
     print(f"Done")
@@ -167,14 +117,10 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
         print(f"IFFT {i} time {iffts_times[i]:.4f} ms")
 
 
+
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='JAX FFT Benchmark')
-    parser.add_argument('-g',
-                        '--global_shape',
-                        type=int,
-                        help='Global shape',
-                        default=None)
+    parser = argparse.ArgumentParser(description='CufftMP Benchmark')
     parser.add_argument('-p',
                         '--pdims',
                         type=str,
@@ -184,6 +130,11 @@ if __name__ == "__main__":
                         '--local_shape',
                         type=int,
                         help='Local shape',
+                        default=None)
+    parser.add_argument('-g',
+                        '--global_shape',
+                        type=int,
+                        help='Global shape of the array',
                         default=None)
     parser.add_argument('-n',
                         '--nb_nodes',
@@ -203,7 +154,7 @@ if __name__ == "__main__":
     parser.add_argument('-i',
                         '--iterations',
                         type=int,
-                        help='Iterations',
+                        help='Number of iterations',
                         default=10)
 
     args = parser.parse_args()
@@ -224,10 +175,6 @@ if __name__ == "__main__":
         print("Please provide either local_shape or global_shape")
         parser.print_help()
         exit(0)
-    pdims = tuple(map(int, args.pdims.split("x")))
-    nb_nodes = args.nb_nodes
-    output_path = args.output_path
-    os.makedirs(output_path, exist_ok=True)
 
     if args.precision == "float32":
         jax.config.update("jax_enable_x64", False)
@@ -238,7 +185,12 @@ if __name__ == "__main__":
         parser.print_help()
         exit(0)
 
-    run_benchmark(pdims, global_shape, nb_nodes, args.precision,
-                  args.iterations, output_path)
+    pdims = tuple(map(int, args.pdims.split("x")))
 
-jax.distributed.shutdown()
+    nb_nodes = args.nb_nodes
+    output_path = args.output_path
+    import os
+    os.makedirs(output_path, exist_ok=True)
+
+    run_benchmark(pdims, global_shape, nb_nodes, args.precision, args.iterations,
+                  output_path)
