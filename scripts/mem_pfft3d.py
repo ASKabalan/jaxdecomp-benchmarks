@@ -67,10 +67,10 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision,
             global_array = do_fft(global_array).block_until_ready()
             global_array = do_ifft(global_array).block_until_ready()
 
+    global out_path_params
     out_path_params = f"{output_path}/{pdims[0]}x{pdims[1]}_{global_shape[0]}_{backend}_{nb_nodes}_{precision}"
     os.makedirs(out_path_params, exist_ok=True)
-    jax.profiler.save_device_memory_profile(
-        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
+    
 
 
 if __name__ == "__main__":
@@ -166,6 +166,10 @@ if __name__ == "__main__":
 
     run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision,
                   args.iterations, output_path)
+
+
+jax.profiler.save_device_memory_profile(
+        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
 
 jaxdecomp.finalize()
 jax.distributed.shutdown()

@@ -30,11 +30,11 @@
 ##########################################
 # /!\ Attention, "multithread" fait reference a l'hyperthreading dans la terminologie Slurm
 #SBATCH --hint=nomultithread         # hyperthreading desactive
-#SBATCH --time=01:00:00              # temps d'execution maximum demande (HH:MM:SS)
-#SBATCH --output=1n-PROFbig_boy.out # nom du fichier de sortie
-#SBATCH --error=1n-PROFbig_boy.out  # nom du fichier d'erreur (ici commun avec la sortie)
+#SBATCH --time=00:01:00              # temps d'execution maximum demande (HH:MM:SS)
+#SBATCH --output=%x_%N_a100.out # nom du fichier de sortie
+#SBATCH --error=%x_%N_a100.out  # nom du fichier d'erreur (ici commun avec la sortie)
 #SBATCH --qos=qos_gpu-dev
-#SBATCH --exclusive                  # ressources dediees
+## SBATCH --exclusive                  # ressources dediees
 # Nettoyage des modules charges en interactif et herites par defaut
 num_nodes=$SLURM_JOB_NUM_NODES
 num_gpu_per_node=$SLURM_NTASKS_PER_NODE
@@ -56,7 +56,8 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-module load nvidia-nsight-compute/2023.3.1.0
+module load nvidia-nsight-systems/2024.1.1.59 
+
 
 echo "The number of nodes allocated for this job is: $num_nodes"
 echo "The number of GPUs allocated for this job is: $nb_gpus"
@@ -141,8 +142,8 @@ declare -A pdims_table
 pdims_table[4]="2x2 1x4 4x1"
 pdims_table[8]="2x4 1x8 8x1 4x2"
 pdims_table[16]="4x4 1x16 16x1"
-pdims_table[32]="4x8 8x4 1x32 32x1"
-pdims_table[64]="8x8 16x4 1x64 64x1"
+pdims_table[32]="4x8 8x4 1x32"
+pdims_table[64]="8x8 16x4 1x64"
 pdims_table[128]="8x16 16x8 4x32 32x4 1x128 128x1 2x64 64x2"
 pdims_table[160]="8x20 20x8 16x10 10x16 5x32 32x5 1x160 160x1 2x80 80x2 4x40 40x4"
 
@@ -189,19 +190,19 @@ for pr in "${precisions[@]}"; do
 done
 
 # out_dir="out_bench/$gpu_name/$nb_gpus"
-out_dir="out_mem/$gpu_name/$nb_gpus"
+# out_dir="out_mem/$gpu_name/$nb_gpus"
 
-echo "Output dir is  : $out_dir"
+# echo "Output dir is  : $out_dir"
 
-for pr in "${precisions[@]}"; do
-    for g in "${grid[@]}"; do
-        for pd in $pdim; do
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-        done
-    done
-done
+# for pr in "${precisions[@]}"; do
+#     for g in "${grid[@]}"; do
+#         for pd in $pdim; do
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#         done
+#     done
+# done

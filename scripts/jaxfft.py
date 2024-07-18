@@ -112,8 +112,8 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
 
     jit_fft_time = 0
     jit_ifft_time = 0
-    jit_ffts_times = []
-    jit_iffts_times = []
+    ffts_times = []
+    iffts_times = []
     with mesh:
         # Warm start
         RangePush("warmup")
@@ -125,24 +125,33 @@ def run_benchmark(pdims, global_shape, nb_nodes, precision, iterations,
             RangePush(f"fft iter {i}")
             global_array, fft_time = chrono_fun(do_fft, global_array)
             RangePop()
-            jit_ffts_times.append(fft_time)
+            ffts_times.append(fft_time)
             RangePush(f"ifft iter {i}")
             global_array, ifft_time = chrono_fun(do_ifft, global_array)
             RangePop()
-            jit_iffts_times.append(ifft_time)
+            iffts_times.append(ifft_time)
 
-    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
-    jit_ffts_times = np.array(jit_ffts_times)
-    jit_iffts_times = np.array(jit_iffts_times)
-    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
+    ffts_times = np.array(ffts_times)
+    iffts_times = np.array(iffts_times)
+    # FFT
+    jit_fft_in_ms = jit_fft_time * 1000
+    fft_min_time = np.min(ffts_times) * 1000
+    fft_max_time  = np.max(ffts_times) * 1000
+    fft_mean_time = jnp.mean(ffts_times) * 1000
+    fft_std_time = jnp.std(ffts_times) * 1000
+    # IFFT
+    jit_ifft_in_ms = jit_ifft_time * 1000
+    ifft_min_time = np.min(iffts_times) * 1000
+    ifft_max_time = np.max(iffts_times) * 1000
+    ifft_mean_time = jnp.mean(iffts_times) * 1000
+    ifft_std_time = jnp.std(iffts_times) * 1000
+    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES JIT_TIME MIN MAX MEAN STD
     with open(f"{output_path}/jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {np.min(jit_ffts_times)},{np.max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_fft_in_ms},{fft_min_time},{fft_max_time},{fft_mean_time},{fft_std_time}\n"
         )
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {np.min(jit_iffts_times)},{np.max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_ifft_in_ms},{ifft_min_time},{ifft_max_time},{ifft_mean_time},{ifft_std_time}\n"
         )
 
     print(f"Done")
@@ -181,6 +190,11 @@ if __name__ == "__main__":
                         type=str,
                         help='Precision',
                         default="float32")
+    parser.add_argument('-i',
+                        '--iterations',
+                        type=int,
+                        help='Iterations',
+                        default=10)
 
     args = parser.parse_args()
 
@@ -214,6 +228,7 @@ if __name__ == "__main__":
         parser.print_help()
         exit(0)
 
-    run_benchmark(pdims, global_shape, nb_nodes, args.precision, output_path)
+    run_benchmark(pdims, global_shape, nb_nodes, args.precision, args.iterations,
+                  output_path)
 
 jax.distributed.shutdown()

@@ -133,12 +133,12 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
 
     # Generate a random gaussian variable for the global
     # mesh shape
-    original_array = normal(key, mesh_shape, comms=comms)
+    global_array = normal(key, mesh_shape, comms=comms)
 
     if jax.process_index() == 0:
         print(f"Devices {jax.devices()}")
         print(
-            f"Global dims {global_shape}, pdims ({comms[0].Get_size()},{comms[1].Get_size()}) , Bachend {backend} original_array shape {original_array.shape}"
+            f"Global dims {global_shape}, pdims ({comms[0].Get_size()},{comms[1].Get_size()}) , Bachend {backend} original_array shape {global_array.shape}"
         )
 
     @jax.jit
@@ -157,10 +157,10 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
         global_array = do_fft(global_array).block_until_ready()
         global_array = do_ifft(global_array).block_until_ready()
 
+    global out_path_params
     out_path_params = f"{output_path}/{pdims[0]}x{pdims[1]}_{global_shape[0]}_{backend}_{nb_nodes}_{precision}"
     os.makedirs(out_path_params, exist_ok=True)
-    jax.profiler.save_device_memory_profile(
-        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")
+    
 
 
 if __name__ == "__main__":
@@ -231,3 +231,7 @@ if __name__ == "__main__":
 
     run_benchmark(global_shape, nb_nodes, pdims, args.precision,
                   args.iterations, output_path)
+
+
+jax.profiler.save_device_memory_profile(
+        f"{out_path_params}/jaxdecompfft_mem_{rank}.prof")

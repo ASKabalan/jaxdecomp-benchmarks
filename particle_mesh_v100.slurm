@@ -30,9 +30,10 @@
 ##########################################
 # /!\ Attention, "multithread" fait reference a l'hyperthreading dans la terminologie Slurm
 #SBATCH --hint=nomultithread         # hyperthreading desactive
-#SBATCH --time=04:00:00              # temps d'execution maximum demande (HH:MM:SS)
-#SBATCH --output=2n-big_boy.out # nom du fichier de sortie
-#SBATCH --error=2n-big_boy.out  # nom du fichier d'erreur (ici commun avec la sortie)
+#SBATCH --time=02:00:00              # temps d'execution maximum demande (HH:MM:SS)
+#SBATCH --output=%x_%N_a100.out # nom du fichier de sortie
+#SBATCH --error=%x_%N_a100.out  # nom du fichier d'erreur (ici commun avec la sortie)
+#SBATCH --qos=qos_gpu-dev
 #SBATCH --exclusive                  # ressources dediees
 # Nettoyage des modules charges en interactif et herites par defaut
 num_nodes=$SLURM_JOB_NUM_NODES
@@ -55,7 +56,7 @@ fi
 
 # Chargement des modules
 module load nvidia-compilers/23.9 cuda/12.2.0 cudnn/8.9.7.29-cuda  openmpi/4.1.5-cuda nccl/2.18.5-1-cuda cmake
-module load nvidia-nsight-compute/2023.3.1.0
+module load nvidia-nsight-systems/2024.1.1.59 
 
 echo "The number of nodes allocated for this job is: $num_nodes"
 echo "The number of GPUs allocated for this job is: $nb_gpus"
@@ -187,20 +188,20 @@ for pr in "${precisions[@]}"; do
     done
 done
 
-# out_dir="out_bench/$gpu_name/$nb_gpus"
-out_dir="out_mem/$gpu_name/$nb_gpus"
+# # out_dir="out_bench/$gpu_name/$nb_gpus"
+# out_dir="out_mem/$gpu_name/$nb_gpus"
 
-echo "Output dir is  : $out_dir"
+# echo "Output dir is  : $out_dir"
 
-for pr in "${precisions[@]}"; do
-    for g in "${grid[@]}"; do
-        for pd in $pdim; do
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-            slaunch scripts/mem_mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
-        done
-    done
-done
+# for pr in "${precisions[@]}"; do
+#     for g in "${grid[@]}"; do
+#         for pd in $pdim; do
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b NCCL_PL -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_pfft3d.py -p $pd -g $g -b MPI_P2P -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#             slaunch scripts/mem_mpi4jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
+#         done
+#     done
+# done

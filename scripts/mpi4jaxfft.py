@@ -142,12 +142,12 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
 
     # Generate a random gaussian variable for the global
     # mesh shape
-    original_array = normal(key, mesh_shape, comms=comms)
+    global_array = normal(key, mesh_shape, comms=comms)
 
     if jax.process_index() == 0:
         print(f"Devices {jax.devices()}")
         print(
-            f"Global dims {global_shape}, pdims ({comms[0].Get_size()},{comms[1].Get_size()}) , Bachend {backend} original_array shape {original_array.shape}"
+            f"Global dims {global_shape}, pdims ({comms[0].Get_size()},{comms[1].Get_size()}) , Bachend {backend} original_array shape {global_array.shape}"
         )
 
     @jax.jit
@@ -160,8 +160,8 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
 
     jit_fft_time = 0
     jit_ifft_time = 0
-    jit_ffts_times = []
-    jit_iffts_times = []
+    ffts_times = []
+    iffts_times = []
     # Warm start
     RangePush("warmup")
     global_array, jit_fft_time = chrono_fun(do_fft, global_array)
@@ -172,24 +172,31 @@ def run_benchmark(global_shape, nb_nodes, pdims, precision, iterations,
         RangePush(f"fft iter {i}")
         global_array, fft_time = chrono_fun(do_fft, global_array)
         RangePop()
-        jit_ffts_times.append(fft_time)
+        ffts_times.append(fft_time)
         RangePush(f"ifft iter {i}")
         global_array, ifft_time = chrono_fun(do_ifft, global_array)
         RangePop()
-        jit_iffts_times.append(ifft_time)
+        iffts_times.append(ifft_time)
 
-    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
-    jit_ffts_times = np.array(jit_ffts_times)
-    jit_iffts_times = np.array(jit_iffts_times)
-    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES MIN MAX MEAN STD
+    ffts_times = np.array(ffts_times)
+    iffts_times = np.array(iffts_times)
+    # FFT
+    fft_min_time = np.min(ffts_times)
+    fft_max_time  = np.max(ffts_times)
+    fft_mean_time = jnp.mean(ffts_times)
+    fft_std_time = jnp.std(ffts_times)
+    # IFFT
+    ifft_min_time = np.min(iffts_times)
+    ifft_max_time = np.max(iffts_times)
+    ifft_mean_time = jnp.mean(iffts_times)
+    ifft_std_time = jnp.std(iffts_times)
+    # RANK TYPE PRECISION SIZE PDIMS BACKEND NB_NODES JIT_TIME MIN MAX MEAN STD
     with open(f"{output_path}/mpi4jaxfft.csv", 'a') as f:
         f.write(
-            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {np.min(jit_ffts_times)},{np.max(jit_ffts_times)},{jnp.mean(jit_ffts_times)},{jnp.std(jit_ffts_times)}\n"
+            f"{jax.process_index()},FFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_fft_time},{fft_min_time},{fft_max_time},{fft_mean_time},{fft_std_time}\n"
         )
         f.write(
-            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},\
-                {np.min(jit_iffts_times)},{np.max(jit_iffts_times)},{jnp.mean(jit_iffts_times)},{jnp.std(jit_iffts_times)}\n"
+            f"{jax.process_index()},IFFT,{precision},{global_shape[0]},{global_shape[1]},{global_shape[2]},{pdims[0]},{pdims[1]},{backend},{nb_nodes},{jit_ifft_time},{ifft_min_time},{ifft_max_time},{ifft_mean_time},{ifft_std_time}\n"
         )
 
     print(f"Done")
