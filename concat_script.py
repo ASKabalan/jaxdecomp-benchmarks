@@ -9,7 +9,7 @@ def concatenate_csvs(root_dir, output_dir):
     gpu_types = ['a100', 'v100']
 
     # Define the CSV file names
-    csv_files_names = ['jaxdecompfft.csv', 'jaxfft.csv', 'mpi4jax.csv']
+    csv_files_names = ['jaxdecompfft.csv', 'jaxfft.csv', 'mpi4jaxfft.csv']
 
     # Iterate over each GPU type
     for gpu in gpu_types:
@@ -23,9 +23,8 @@ def concatenate_csvs(root_dir, output_dir):
             # List CSV in directory and subdirectories
             csv_files = []
             for root, dirs, files in os.walk(gpu_dir):
-                print(f"Searching for {csv_file_name} in {root}...")
                 for file in files:
-                    if file.endswith(csv_file_name):
+                    if file == csv_file_name:
                         csv_files.append(os.path.join(root, file))
 
             # Concatenate CSV files
@@ -38,7 +37,8 @@ def concatenate_csvs(root_dir, output_dir):
                                  names=[
                                      "rank", "FFT_type", "precision", "x", "y",
                                      "z", "px", "py", "backend", "nodes",
-                                     "time"
+                                     "jit_time", "min_time", "max_time",
+                                     "mean_time", "std_time", "last_time"
                                  ],
                                  index_col=False)
                 combined_df = pd.concat([combined_df, df], ignore_index=True)
@@ -55,7 +55,9 @@ def concatenate_csvs(root_dir, output_dir):
                 print(f"Creating directory {os.path.join(output_dir, gpu)}")
                 os.makedirs(os.path.join(output_dir, gpu))
 
+
             output_file = os.path.join(output_dir, gpu, csv_file_name)
+            print(f"writing file to {output_file}...")
             combined_df.to_csv(output_file, index=False)
 
 

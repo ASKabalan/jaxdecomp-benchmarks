@@ -27,11 +27,12 @@ def plot_by_gpus(dataframes,
         plt.style.use('dark_background')
 
     if backends is None:
-        backends = ['MPI', 'NCCL', 'MPI4JAX']
+        backends = ['MPI', 'NCCL', 'MPI4JAX', 'NCCL_PL', 'MPI_P2P']
 
     for method, df in dataframes.items():
         if not df[df['x'].isin(fixed_data_size)].empty:
             continue
+
 
     num_subplots = len(fixed_data_size)
     num_rows = int(np.ceil(np.sqrt(num_subplots)))
@@ -54,18 +55,19 @@ def plot_by_gpus(dataframes,
                 continue
             df = df.sort_values(by=['gpus'])
             number_of_gpus.extend(df['gpus'].values)
-            times.extend(df['time'].values)
+            times.extend(df["time"].values)
 
             if simple_plot.get(method) is not None:
                 label = f"{method}" if not nodes_in_label else f"{method}-{df['nodes'].values[0]}nodes"
                 ax.plot(df['gpus'].values,
-                        df['time'],
+                        df["time"],
                         marker='o',
                         linestyle='-',
                         label=label)
                 continue
 
             for backend in backends:
+    
                 df_backend = df[df['backend'] == backend]
                 if df_backend.empty:
                     continue
@@ -75,7 +77,7 @@ def plot_by_gpus(dataframes,
                 sorted_dfs = []
 
                 for _, group in df_decomp:
-                    group.sort_values(by=['time'],
+                    group.sort_values(by=["time"],
                                       inplace=True,
                                       ascending=False)
                     for px, py in zip(group['px'].values, group['py'].values):
@@ -87,7 +89,7 @@ def plot_by_gpus(dataframes,
 
                 label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
                 ax.plot(sorted_df['gpus'].values,
-                        sorted_df['time'],
+                        sorted_df["time"],
                         marker='o',
                         linestyle='-',
                         label=label)
@@ -119,7 +121,7 @@ def plot_by_gpus(dataframes,
         y_min, y_max = min(times) * 0.9, max(times) * 1.1
         ax.set_ylim([y_min, y_max])
         ax.set_xscale('function', functions=(f2, g2))
-        ax.set_yscale('function', functions=(f10, g10))
+        ax.set_yscale('symlog')
         ax.set_xticks(unique_gpus)
         time_ticks = [
             10**t for t in range(int(np.floor(np.log10(y_min))), 1 +
@@ -128,12 +130,12 @@ def plot_by_gpus(dataframes,
         ax.set_yticks(time_ticks)
 
         ax.set_xlabel('Number of GPUs')
-        ax.set_ylabel('Time (secondes)')
+        ax.set_ylabel('Time (milliseconds)')
 
         for x_value in unique_gpus:
             ax.axvline(x=x_value, color='gray', linestyle='--', alpha=0.5)
 
-        ax.legend(loc='best')
+        ax.legend(loc='lower center', bbox_to_anchor=(0.5, 0.05), ncol=4,prop={'size': 14}) 
 
     for i in range(num_subplots, num_rows * num_cols):
         fig.delaxes(axs[i])
@@ -168,7 +170,7 @@ def plot_by_data_size(dataframes,
     plt.rcParams.update({'font.size': 10})
 
     if backends is None:
-        backends = ['MPI', 'NCCL', 'MPI4JAX']
+        backends = ['MPI', 'NCCL', 'MPI4JAX' , 'NCCL_PL', 'MPI_P2P']
 
     for method, df in dataframes.items():
         if df[df['gpus'] == int(fixed_gpu_size[0])].empty:
@@ -203,11 +205,11 @@ def plot_by_data_size(dataframes,
 
             df = df.sort_values(by=['x'])
             data_sizes.extend(df['x'].values)
-            times.extend(df['time'].values)
+            times.extend(df["time"].values.astype(np.float32))
 
             if simple_plot.get(method) is not None:
                 ax.plot(df['x'].values,
-                        df['time'],
+                        df["time"],
                         marker='o',
                         linestyle='-',
                         label=f"{method}")
@@ -232,11 +234,10 @@ def plot_by_data_size(dataframes,
                     sorted_dfs.append(group.iloc[0])
 
                 sorted_df = pd.DataFrame(sorted_dfs)
-                times.extend(sorted_df["time"].values)
 
                 label = f"{method}-{backend}-{group['nodes'].values[0]}nodes" if nodes_in_label else f"{method}-{backend}"
                 ax.plot(sorted_df['x'].values,
-                        sorted_df['time'],
+                        sorted_df["time"],
                         marker='o',
                         linestyle='-',
                         label=label)
@@ -264,7 +265,7 @@ def plot_by_data_size(dataframes,
         y_min, y_max = min(times) * 0.9, max(times) * 1.1
         ax.set_ylim([y_min, y_max])
         ax.set_xscale('function', functions=(f2, g2))
-        ax.set_yscale('function', functions=(f10, g10))
+        ax.set_yscale('symlog')
         time_ticks = [
             10**t for t in range(int(np.floor(np.log10(y_min))), 1 +
                                  int(np.ceil(np.log10(y_max))))
@@ -278,7 +279,7 @@ def plot_by_data_size(dataframes,
         for x_value in data_sizes:
             ax.axvline(x=x_value, color='grey', linestyle=':', alpha=0.5)
 
-        ax.legend(loc='lower right', fontsize='small')
+        ax.legend(loc='lower center' , bbox_to_anchor=(0.5, 0.05), ncol=4,prop={'size': 14})
         ax.tick_params(axis='y',
                        which='both',
                        labelleft=True,
@@ -308,7 +309,8 @@ def clean_up_csv(csv_files,
                  fft_type,
                  gpus=None,
                  data_sizes=None,
-                 time_aggregation='mean'):
+                 time_aggregation='mean',
+                 time_column='mean_time'):
     dataframes = {}
     for csv_file in csv_files:
         file_name = os.path.splitext(os.path.basename(csv_file))[0]
@@ -320,10 +322,31 @@ def clean_up_csv(csv_files,
 
         df = pd.read_csv(csv_file,
                          header=None,
+                         skiprows=1,
                          names=[
                              "rank", "FFT_type", "precision", "x", "y", "z",
-                             "px", "py", "backend", "nodes", "time"
+                             "px", "py", "backend", "nodes", "jit_time",
+                             "min_time", "max_time", "mean_time", "std_div",
+                             "last_time"
                          ],
+                         dtype={
+                             "rank": int,
+                             "FFT_type": str,
+                             "precision": str,
+                             "x": int,
+                             "y": int,
+                             "z": int,
+                             "px": int,
+                             "py": int,
+                             "backend": str,
+                             "nodes": int,
+                             "jit_time": float,
+                             "min_time": float,
+                             "max_time": float,
+                             "mean_time": float,
+                             "std_div": float,
+                             "last_time": float
+                         },
                          index_col=False)
 
         df = df[(df['precision'] == precision) & (df['FFT_type'] == fft_type)]
@@ -347,16 +370,24 @@ def clean_up_csv(csv_files,
 
         num_gpu = [len(sub_df) for sub_df in sub_dfs]
         num_node = [nodes for _ in sub_dfs]
-
         aggregated_dfs = []
         for sub_df in sub_dfs:
-            if time_aggregation == 'mean':
-                sub_df['time'] = sub_df['time'].mean()
+            # if csvfile is jaxfft.csv , then time is max_time
+            if csv_file.split("/")[-1] == "jaxfft.csv":
+                sub_df["time"] = sub_df['max_time']
+                print(f"helo")
+            elif time_aggregation == 'mean':
+                sub_df["time"] = sub_df[time_column].mean()
             elif time_aggregation == 'min':
-                sub_df['time'] = sub_df['time'].min()
+                sub_df["time"] = sub_df[time_column].min()
             elif time_aggregation == 'max':
-                sub_df['time'] = sub_df['time'].max()
-            sub_df.drop(columns=['rank'], inplace=True)
+                sub_df["time"] = sub_df[time_column].max()
+
+            sub_df.drop(columns=[
+                'rank', 'jit_time', 'min_time', 'max_time', 'mean_time',
+                'std_div', 'last_time'
+            ],
+                        inplace=True)
             aggregated_dfs.append(sub_df.iloc[0])
 
         aggregated_df = pd.DataFrame(aggregated_dfs)
@@ -414,6 +445,14 @@ if __name__ == "__main__":
                         choices=['mean', 'min', 'max'],
                         default='mean',
                         help='Time aggregation method')
+    parser.add_argument('-tc',
+                        '--time_column',
+                        choices=[
+                            'jit_time', 'min_time', 'max_time', 'mean_time',
+                            'std_div', 'last_time'
+                        ],
+                        default='mean_time',
+                        help='Time column to plot')
     parser.add_argument('-db',
                         '--dark_bg',
                         type=bool,
@@ -447,7 +486,10 @@ if __name__ == "__main__":
             simple_plot[method] = True
 
     dataframes = clean_up_csv(args.csv_files, args.precision, args.fft_type,
-                              args.gpus, args.data_size, args.time_aggregation)
+                              args.gpus, args.data_size, args.time_aggregation,
+                              args.time_column)
+
+    import sys
 
     if args.scaling == 'Weak':
         plot_by_data_size(dataframes, simple_plot, args.gpus,
