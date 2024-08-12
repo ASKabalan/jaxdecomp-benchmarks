@@ -11,49 +11,30 @@ fft_types=("FFT" "IFFT")
 dark_mode="True"
 backend="NCCL"
 jaxdecomp_a100_new="slabs_new/a100/JAXDECOMP.csv"
-jaxdecomp_a100_old="slabs_old/a100/old_JAXDECOMP.csv"
+# jaxdecomp_a100_old="slabs_old/a100/old_JAXDECOMP.csv"
 jaxdecomp_v100_new="slabs_new/v100/JAXDECOMP.csv"
-jaxdecomp_v100_old="slabs_old/v100/old_JAXDECOMP.csv"
+# jaxdecomp_v100_old="slabs_old/v100/old_JAXDECOMP.csv"
 jax_a100_new="slabs_new/a100/JAX.csv"
-jax_a100_old="slabs_old/a100/old_JAX.csv"
+# jax_a100_old="slabs_old/a100/old_JAX.csv"
 jax_v100_new="slabs_new/v100/JAX.csv"
-jax_v100_old="slabs_old/v100/old_JAX.csv"
-
+# jax_v100_old="slabs_old/v100/old_JAX.csv"
+time_columns="mean_time"
+memory_columns="temp_size"
 
 for size in ${sizes[@]}; do
-
-  # compare new JAXDECOMP with new JAX
+  # mean time plotting
   for precision in ${precisions[@]}; do
       for fft_type in ${fft_types[@]}; do
-          hpc-plotter plot -f $jaxdecomp_a100_new $jax_a100_new -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -fn $fft_type -d $size -db $dark_mode -o plots/gpus_a100_NN_${fft_type}_${precision}_${size}.png -sc Strong -tc $time_columns -ps plot_all -b $backend
-      done
-  done
-
-  # compare new JAXDECOMP with new JAX V100
-  for precision in ${precisions[@]}; do
-      for fft_type in ${fft_types[@]}; do
-          hpc-plotter plot -f $jaxdecomp_v100_new $jax_v100_new -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -fn $fft_type -d $size -db $dark_mode -o plots/gpus_v100_NN_${fft_type}_${precision}_${size}.png -sc Strong -tc $time_columns -ps plot_all -b $backend
-      done
-  done
-
-  # compare old JAXDECOMP with old JAXDECOMP a100
-  for precision in ${precisions[@]}; do
-      for fft_type in ${fft_types[@]}; do
-          hpc-plotter plot -f $jaxdecomp_a100_old $jax_a100_old -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -fn $fft_type -d $size -db $dark_mode -o plots/gpus_a100_NO_${fft_type}_${precision}_${size}.png -sc Strong -tc $time_columns -ps plot_all -b $backend
-      done
-  done
-
-  # compare old JAX with old JAX jax_a100
-  for precision in ${precisions[@]}; do
-      for fft_type in ${fft_types[@]}; do
-          hpc-plotter plot -f $jaxdecomp_v100_old $jax_v100_old -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -fn $fft_type -d $size -db $dark_mode -o plots/gpus_v100_JNO_${fft_type}_${precision}_${size}.png -sc Strong -tc $time_columns -ps plot_all -b $backend
-      done
-  done
-
-  # compare old JAXDECOMP with new JAXDECOMP v100
-  for precision in ${precisions[@]}; do
-      for fft_type in ${fft_types[@]}; do
-          hpc-plotter plot -f $jaxdecomp_v100_old $jaxdecomp_v100_new -fs $figure_size -g $gpus -ta $time_aggregations -p $precision -fn $fft_type -d $size -db $dark_mode -o plots/gpus_v100_NO_${fft_type}_${precision}_${size}.png -sc Strong -tc $time_columns -ps plot_all -b $backend
+        #Strong scaling
+        jhp plot -f $jaxdecomp_a100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/gpus_a100_${fft_type}_${precision}_${size}_${time_columns}.png -sc Strong  -b $backend -pt $time_columns
+        jhp plot -f $jaxdecomp_a100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/gpus_a100_${fft_type}_${precision}_${size}_used_mem.png -sc Strong  -b $backend -pm $memory_columns
+        jhp plot -f $jaxdecomp_v100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/gpus_v100_${fft_type}_${precision}_${size}_${time_columns}.png -sc Strong  -b $backend -pt $time_columns
+        jhp plot -f $jaxdecomp_v100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/gpus_v100_${fft_type}_${precision}_${size}_used_mem.png -sc Strong  -b $backend -pm $memory_columns
+        #Weak scaling
+        jhp plot -f $jaxdecomp_a100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/data_a100_${fft_type}_${precision}_${size}_${time_columns}.png -sc Weak  -b $backend -pt $time_columns
+        jhp plot -f $jaxdecomp_a100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/data_a100_${fft_type}_${precision}_${size}_used_mem.png -sc Weak  -b $backend -pm $memory_columns
+        jhp plot -f $jaxdecomp_v100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/data_v100_${fft_type}_${precision}_${size}_${time_columns}.png -sc Weak  -b $backend -pt $time_columns
+        jhp plot -f $jaxdecomp_v100_new $jax_a100_new -g $gpus -d $size -ps plot_all -pr $precision -fs $figure_size -fn $fft_type -db $dark_mode -o plots/data_v100_${fft_type}_${precision}_${size}_used_mem.png -sc Weak  -b $backend -pm $memory_columns
       done
   done
 done
