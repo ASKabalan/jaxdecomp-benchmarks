@@ -19,7 +19,7 @@ from jax.sharding import PartitionSpec as P
 from jax_hpc_profiler import Timer
 
 
-def run_benchmark(pdims, global_shape, backend, nb_nodes, precision, iterations, trace,
+def run_benchmark(pdims, global_shape, backend, nb_nodes, precision, iterations, trace,contiguous,
                   output_path):
 
   if backend == "NCCL":
@@ -34,6 +34,9 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision, iterations,
   array = jax.random.normal(
       shape=[global_shape[0] // pdims[0], global_shape[1] // pdims[1], global_shape[2]],
       key=jax.random.PRNGKey(rank))
+
+  if contiguous:
+    jaxdecomp.config.update('transpose_axis_contiguous', contiguous)
 
   # Remap to the global array from the local slice
   devices = mesh_utils.create_device_mesh(pdims)
@@ -100,10 +103,11 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision, iterations,
         RangePush(f"ifft iter {i}")
         global_array = ifft_chrono.chrono_fun(do_ifft, global_array)
         RangePop()
-
+  
+  cont_str = "-cont" if contiguous else "-noncont"
   if not trace:
     fft_metadata = {
-        'function': "FFT",
+        'function': f"FFT{cont_str}",
         'precision': precision,
         'x': str(global_shape[0]),
         'px': str(pdims[0]),
@@ -112,7 +116,7 @@ def run_benchmark(pdims, global_shape, backend, nb_nodes, precision, iterations,
         'nodes': str(nb_nodes),
     }
     ifft_metadata = {
-        'function': "IFFT",
+        'function': f"IFFT{cont_str}",
         'precision': precision,
         'x': str(global_shape[0]),
         'px': str(pdims[0]),
@@ -144,6 +148,7 @@ if __name__ == "__main__":
   parser.add_argument('-o', '--output_path', type=str, help='Output path', default=".")
   parser.add_argument('-pr', '--precision', type=str, help='Precision', default="float32")
   parser.add_argument('-i', '--iterations', type=int, help='Number of iterations', default=10)
+  parser.add_argument('-c', '--contiguous', type=bool, help='Contiguous', default=True)
   parser.add_argument('-t', '--trace', action='store_true', help='Profile using tensorboard')
 
   args = parser.parse_args()
@@ -188,7 +193,7 @@ if __name__ == "__main__":
         # Do not raise error for slurm jobs
         # raise ValueError(f"Global shape {global_shape} is not divisible by pdims {pdims}")
 
-  run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision, args.iterations, args.trace,
+  run_benchmark(pdims, global_shape, backend, nb_nodes, args.precision, args.iterations, args.trace,args.contiguous,
                 output_path)
 
 jaxdecomp.finalize()

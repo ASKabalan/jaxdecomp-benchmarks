@@ -167,7 +167,8 @@ echo "Trace dir is  : $trace_dir"
 for pr in "${precisions[@]}"; do
     for g in "${grid[@]}"; do
         for pd in $pdim; do
-            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr
+            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr -c True
+            slaunch scripts/pfft3d.py -p $pd -g $g -b NCCL -n $num_nodes -o $out_dir -pr $pr -c False
             slaunch scripts/jaxfft.py  -p $pd -g $g -n $num_nodes -o $out_dir -pr $pr
         done
     done
